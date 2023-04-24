@@ -1,28 +1,41 @@
 package com.example.javapractice;
 
-import java.util.ArrayList;
+import static com.sun.tools.classfile.AccessFlags.Kind.InnerClass;
+
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MyClass {
 
 
-        interface somaIcha {
-            int a = 0;
+
+class OuterClass  {
+        static int someVar = 10;
+          static class SomeInnerClass {
+                void printOuterVar(){
+                    System.out.println(someVar);
+                }
         }
 
-        class done implements somaIcha {
+}
+class DataClass{
+    private int numOfLines = 20;
+    public int getNumOfLines(){
+        return numOfLines;
+    }
+    public void setNumOfLines(int lines){
+        this.numOfLines = lines;
+    }
+}
+public class MyClass{
 
-        }
-
-        static List<String> arrayListOfString = Arrays.asList("a b c d e f g".split(" "));
-        static Map<Integer,Integer> mapOfInts = new HashMap<Integer,Integer>();
-
+        OuterClass.SomeInnerClass v =  new OuterClass.SomeInnerClass();
         public static void main(String[] args) {
 
         }
+
+
+
 }
+
