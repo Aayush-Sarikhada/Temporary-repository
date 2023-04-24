@@ -1,0 +1,9 @@
+//only some difference are mentioned here there can be others too.
+
+//List and Array
+    1. in some aspects lists are very similar to arrays. However, there is one important difference: an array's size is defined upon initialization and is never changed; in turn, a list doesn't have a predefined size; a list's size can be changed as a result of write operations: adding, updating, or removing elements.
+    In Kotlin,
+    the default implementation of MutableList is ArrayList which you can think of as a resizable array.
+
+
+

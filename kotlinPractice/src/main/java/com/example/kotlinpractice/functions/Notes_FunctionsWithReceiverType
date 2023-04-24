@@ -1,0 +1,11 @@
+//DEF:  Function types with receiver, such as A.(B) -> C, can be instantiated with a special form of function literals – function literals with receiver.
+
+This behavior is similar to that of extension functions, which also allow you to access the members of the receiver object inside the function body.
+
+Here is an example of a function literal with receiver along with its type, where plus is called on the receiver object:
+
+val sum: Int.(Int) -> Int = { other -> plus(other) }
+
+
+The anonymous function syntax allows you to specify the receiver type of a function literal directly. This can be useful if you need to declare a variable of a function type with receiver, and then to use it later.
+

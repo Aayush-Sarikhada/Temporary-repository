@@ -1,0 +1,43 @@
+//this file contains those points that i've seen in the docs
+--> The default implementation of MutableSet – LinkedHashSet – preserves the order of elements insertion.
+--> An alternative implementation – HashSet – says nothing about the elements order, so calling such functions on it returns unpredictable results. However, HashSet requires less memory to store the same number of elements.
+
+//maps
+--> Two maps containing the equal pairs are equal regardless of the pair order.
+--> The default implementation of MutableMap – LinkedHashMap – preserves the order of elements insertion when iterating the map. In turn, an alternative implementation – HashMap – says nothing about the elements order.
+
+--> Note that the to notation creates a short-living Pair object, so it's recommended that you use it only if performance isn't critical. To avoid excessive memory usage, use alternative ways. For example, you can create a mutable map and populate it using the write operations. The apply() function can help to keep the initialization fluent here.
+
+Another way of creating a collection is to call a builder function – buildList(), buildSet(), or buildMap(). They create a new, mutable collection of the corresponding type, populate it using write operations, and return a read-only collection with the same elements:
+
+val map = buildMap { // this is MutableMap<String, Int>, types of key and value are inferred from the `put()` calls below
+    put("a", 1)
+    put("b", 0)
+    put("c", 4)
+}
+
+println(map) // {a=1, b=0, c=4}
+
+//Copying in collections
+Collection copying functions from the standard library create shallow copy collections with references to the same elements. Thus, a change made to a collection element reflects in all its copies.
+
+//shallow copy: internal reference will be the same
+ If you add or remove elements from the original collection, this won't affect the copies. Copies may be changed independently of the source as well.
+
+These functions can also be used for converting collections to other types,
+
+//iterators
+
+NOTE:1.1 Once the iterator passes through the last element, it can no longer be used for retrieving elements; neither can it be reset to any previous position. To iterate through the collection again, create a new iterator.
+
+//LIST ITERATORS
+bi direction iteration (hasNext, next and hasPrevious and previous)
+also,nextIndex and previousIndex
+
+contrary to note1.1 ,Having the ability to iterate in both directions, means the ListIterator can still be used after it reaches the last element.
+
+Mutable iterators
+For iterating mutable collections, there is MutableIterator that extends Iterator with the element removal function remove(). So, you can remove elements from a collection while iterating it.
+
+In addition to removing elements, the MutableListIterator can also insert and replace elements while iterating the list.
+with remove, add and set

@@ -1,0 +1,18 @@
+Lambda expressions and anonymous functions are function literals. Function literals are functions that are not declared but are passed immediately as an expression. Consider the following example:
+
+'//LAMBDA EXPRESSIONS
+A lambda expression is always surrounded by curly braces.
+
+  Parameter declarations in the full syntactic form go inside curly braces and have optional type annotations.
+
+  The body goes after the ->.
+
+  If the inferred return type of the lambda is not Unit, the last (or possibly single) expression inside the lambda body is treated as the return value.
+
+//ANONYMOUS FUNCTIONS
+The lambda expression syntax above is missing one thing – the ability to specify the function's return type. In most cases, this is unnecessary because the return type can be inferred automatically. However, if you do need to specify it explicitly, you can use an alternative syntax: an anonymous function.
+
+//NOTE:When passing anonymous functions as parameters, place them inside the parentheses. The shorthand syntax that allows you to leave the function outside the parentheses works only for lambda expressions.
+
+//DIFF:
+Another difference between lambda expressions and anonymous functions is the behavior of non-local returns. A return statement without a label always returns from the function declared with the fun keyword. This means that a return inside a lambda expression will return from the enclosing function, whereas a return inside an anonymous function will return from the anonymous function itself.
