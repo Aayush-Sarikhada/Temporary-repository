@@ -79,5 +79,4 @@ fun main(){
     println(person1.money)
 
     var response = HttpResponse(requestCode = 404,"Page not found")
-
 }

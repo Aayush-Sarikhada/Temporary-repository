@@ -9,13 +9,13 @@ This file contains callback problem solution given by prembhai in reverse KT.
  */
 
 //problem given in second KT (related to callbacks)
-data class User(val firstName:String, val secondName:String){
+data class User(val firstName:String, val secondName:String) {
     val userName:String = "$firstName@$secondName"
 
 }
 
-class ApiService{
-    fun getResponseWithDelay(userName:String, callBack:(String)->Unit){
+class ApiService {
+    fun getResponseWithDelay(userName:String, callBack:(String)->Unit) {
         if(userName == "Aayush@Sarikhada")
             callBack("AVAILABLE")
         else
@@ -23,8 +23,8 @@ class ApiService{
     }
 
 }
-class Authenticator{
-    inline fun isAuthenticate(userName: String, crossinline callBack:(String)->Unit){
+class Authenticator {
+    inline fun isAuthenticate(userName: String, crossinline callBack:(String)->Unit) {
        ApiService().getResponseWithDelay(userName){
            callBack(it)
        }
