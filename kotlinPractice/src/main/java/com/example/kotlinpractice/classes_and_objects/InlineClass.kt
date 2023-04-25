@@ -17,40 +17,37 @@ This file contains examples and notes of inline class in kotlin.
 //"value" keyword is used for inline classes (inline keyword is deprecated)
 //exactly one parameter is needed in primary constructor
 
-@JvmInline
-value class FirstInlineClass(private val s:String)
-
 //NOTE: An inline class must have a single property initialized in the primary constructor. At runtime, instances of the inline class will be represented using this single property
 
 @JvmInline
-value class Password(private val s:String)
-val securePassword = Password("Abcdefg")
+value class Password(private val passwordString:String)
+val securePassword = Password("ab12345")
 
 //Inline classes can have properties, function and init block
 //inline classes can NOT have backing fields. They can only have simple computable properties( no lateInit/delegated properties)
 
 @JvmInline
-value class Name(val s:String){
+value class Name(private val internalName:String) {
     init {
-        require(s.isNotEmpty()){}                    //require(Boolean) throws IllegalArgumentException when its argument is false. Use it to test function arguments.
+        require(internalName.isNotEmpty()){}                    //require(Boolean) throws IllegalArgumentException when its argument is false. Use it to test function arguments.
     }
 
     val length:Int
-        get() = s.length
+        get() = internalName.length
 
     fun greet(){
-        println("Hello, $s")
+        println("Hello, $internalName")
     }
 }
 
 //inline classes are allowed to inherit from "interfaces"
 //NOTE: It is forbidden for inline classes to participate in a class hierarchy. This means that inline classes cannot extend other classes and are always final.
-interface Printable{
+interface Printable {
     fun prettyPrint():String
 }
 @JvmInline
-value class Name2(val s:String):Printable{
-    override fun prettyPrint(): String  = "Let's $s!"
+value class NameWithPrettyPrint(private val internalName: String): Printable {
+    override fun prettyPrint(): String  = "Let's go $internalName!"
 }
 
 //The Kotlin compiler will prefer using underlying types instead of wrappers to produce the most performant and optimized code. However, sometimes it is necessary to keep wrappers around. As a rule of thumb, inline classes are boxed whenever they are used as another type.
@@ -64,18 +61,16 @@ value class Name2(val s:String):Printable{
 //fun compute(s: UserId<String>) {} // compiler generates fun compute-<hashcode>(s: Any?)
 //Generic inline classes is an Experimental feature. It may be dropped or changed at any time. Opt-in is required with the -language-version 1.8 compiler option.
 
-
 //MANGLING in kotlin for inline classes
 
-interface I
+interface InterfaceThatWillBeImplementedByClass
 @JvmInline
-value class Foo(val i:Int): I
+value class Foo(val internalInt:Int): InterfaceThatWillBeImplementedByClass
 
-fun asInline(f:Foo){}
-fun <T> asGeneric(x:T){}
-fun asInterface(i:I){}
-fun asNullable(i:Foo?){}
-fun <T> id(x: T): T = x
+fun asInline(asInlineClassAsItIs:Foo){}
+fun <T> asGeneric(inlineClassObjAsGeneric:T){}
+fun asInterface(inlineClassObjAsInterface:InterfaceThatWillBeImplementedByClass){}
+fun asNullable(inlineClassObjNullable:Foo?){}
 
 //Mangling
 //Since inline classes are compiled to their underlying type, it may lead to various obscure errors, for example unexpected platform signature clashes:
@@ -93,10 +88,8 @@ fun compute(x: UInt) { }
 
 //NOTE:The mangling scheme has been changed in Kotlin 1.4.30. Use the -Xuse-14-inline-classes-mangling-scheme compiler flag to force the compiler to use the old 1.4.0 mangling scheme and preserve binary compatibility.
 
-
 //calling from java code
 //You can call functions that accept inline classes from Java code. To do so, you should manually disable mangling: add the @JvmName annotation before the function declaration:
-
 //@JvmInline
 //value
 
@@ -107,17 +100,13 @@ fun main(){
     name.greet()
     println(name.length)
 
-    val playName = Name2("Play")
+    val playName = NameWithPrettyPrint("Play")
     println(playName.prettyPrint()) // Still called as a static method
 
-    val f = Foo(42)
+    val instanceOfFooToTestInlineClasses = Foo(42)
 
-    asInline(f)     //unboxed: used as Foo itself
-    asGeneric(f)        //boxed: used as generic type T
-    asInterface(f)      //boxed: used as type I
-    asNullable(f)   //boxed: used as Foo?, which is different from Foo
-
-    //below, 'f' first is boxed (while being passed to 'id' and then unboxed (when returned from 'id')
-    //in the end, 'c' contains unboxed representation (just '42', as 'f'
-    val c = id(f)
+    asInline(instanceOfFooToTestInlineClasses)     //unboxed: used as Foo itself
+    asGeneric(instanceOfFooToTestInlineClasses)        //boxed: used as generic type T
+    asInterface(instanceOfFooToTestInlineClasses)      //boxed: used as type I
+    asNullable(instanceOfFooToTestInlineClasses)   //boxed: used as Foo?, which is different from Foo
 }

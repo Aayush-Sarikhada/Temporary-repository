@@ -7,14 +7,14 @@ Updated on: 19 apr 2023
 This file contains examples of Inheritance in kotlin.
  */
 
-interface Shape{
-    val vertices:Int
+interface Shape {
+    val vertices: Int
 }
 class Rectangle(override val vertices: Int = 4): Shape
 
 class Polygon(override var vertices: Int = 0): Shape
 
-open class BaseClass(var name:String){
+open class BaseClass(var name: String){
     init {
         println("primary of base class")
     }
@@ -22,10 +22,10 @@ open class BaseClass(var name:String){
         name.length.also { println("initializing size property in base class....") }
 }
 
-class ChildClass(
-    name:String,
-    val lastName:String
-): BaseClass(name){
+class ChildClass (
+    name: String,
+    lastName: String
+): BaseClass(name) {
     init {
         println("primary of child class")
     }
@@ -39,14 +39,16 @@ class ChildClass(
 //overriding rules in kotlin------------------------>
 //In Kotlin, implementation inheritance is regulated by the following rule: if a class inherits multiple implementations of the same member from its immediate superclasses, it must override this member and provide its own implementation (perhaps, using one of the inherited ones).
 //ex:
-open class ShapeWithDraw(){
-    open fun draw(){}
+open class ShapeWithDraw() {
+    open fun draw() {
+        println("drawing from ShapeWithDraw")
+    }
 }
 
-//bydefaykt interface's members are open
-interface ShapeInterface{
-    fun draw(){
-
+//by default interface's members are open
+interface ShapeInterface {
+    fun draw() {
+        println("drawing with ShapeInterface")
     }
 }
 
@@ -59,10 +61,10 @@ class InheritedClass: ShapeWithDraw(), ShapeInterface {
 }
 
 //custom getters and setters and backing fields
-class DemoForGettersandSetters{
-    var num:Int = 0        //initializer assigns a backing field (called "field" directly so if we want to use backing field we have to initialize the property first)
+class Mobile {
+    var price:Int = 10000        //initializer assigns a backing field (called "field" directly so if we want to use backing field we have to initialize the property first)
         set(value) {
-            field = value * 10      //here using "num" instead of "field" will cause a recursive situation
+            field = value / 10      //here using "price" instead of "field" will cause a recursive situation
         }
     //field identifier can only be used in the accessor of the property
 
@@ -75,15 +77,14 @@ class DemoForGettersandSetters{
 //    get() = this.size == 0
 
 //backing properties
-class DemoForBackingProperties{
-    private var _age:Int = 0
-    public var age:Int
-    get() = _age
-    set(value) {
-        _age = value
-    }
+class Tree(val treeName: String) {
+    private var _age:Int = 100
+    var treeAge:Int
+        get() = _age*10
+        set(value) {
+            _age = value/10
+        }
 }
-
 
 //
 //To check whether a lateinit var has already been initialized, use .isInitialized on the reference to that property:
@@ -92,10 +93,16 @@ class DemoForBackingProperties{
 //    println(foo.bar)
 //}
 
-
-
 fun main(){
 //    You can also override a val property with a var property, but not vice versa. This is allowed because a val property essentially declares a get method, and overriding it as a var additionally declares a set method in the derived class.
 //    Note that you can use the override keyword as part of the property declaration in a primary constructor:
+
+    InheritedClass().draw()             //prints: "drawing with ShapeWithDraw"
+                                        // "drawing with shapeInterface
+
+    val oakTree = Tree("oak tree")
+    println(oakTree.treeName)
+    println(oakTree.treeAge)
+
 
 }

@@ -7,26 +7,26 @@ Updated on: 19 apr 2023
 This file contains code and notes for Extensions functions.
  */
 
-
 fun main(){
 
-//    fun MutableList<Int>.swap(index1:Int, index2:Int){
-//        val temp = this[index1]
-//        this[index1] = this[index2]
-//        this[index2] = temp
-//    }
+    //for mutableList of int types
+//  fun MutableList<Int>.swap(index1:Int, index2:Int){
+//      val temp = this[index1]
+//      this[index1] = this[index2]
+//      this[index2] = temp
+//  }
 
     //generic
-    fun <T> MutableList<T>.swap(index1:Int, index2:Int){
+    fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
         val temp = this[index1]
         this[index1] = this[index2]
         this[index2] = temp
     }
 
-    val someList = mutableListOf<Int>(1,2,3,4,5,6)
-    println(someList)
-    someList.swap(3,5)
-    println(someList)
+    val listOfIntNumbersUsedAsSwapExample = mutableListOf(1,2,3,4,5,6)
+    println(listOfIntNumbersUsedAsSwapExample)  //1,2,3,4,5,6
+    listOfIntNumbersUsedAsSwapExample.swap(3,5)
+    println(listOfIntNumbersUsedAsSwapExample)  //1,2,3,6,5,4
 
 
     //NOTE: extensions are resolved statically
@@ -41,18 +41,18 @@ fun main(){
     // expression at runtime. For example:
 
     open class Shape
-    class Rectangle:Shape()
+    class Rectangle: Shape()
 
     fun Shape.getName() = "Shape"
     fun Rectangle.getName() = "Rectangle"
 
 
 
-    fun printClassName(s: Shape) {
-        println(s.getName())
+    fun printClassName(shape: Shape) {
+        println(shape.getName())
     }
 
-    printClassName(Rectangle()) //prints "Shape"
+    printClassName(Rectangle())     //prints "Shape"
 
     //if a class has a member function and an extension function is defined which has the
     //same receiver type, the same name, and is applicable to given arguments, the member
@@ -63,14 +63,14 @@ fun main(){
     // and they can check for this == null inside the body.
 
     //ex:
-    fun Any?.toString():String{
+    fun Any?.toString(): String {
         if (this == null) return "Null"
 
         return toString()
     }
 
-    val listOfStrings = listOf<String>("A","B","C","D")
-    listOfStrings.lastIndex
+    val listOfCapitalAlphabets = listOf("A","B","C","D")
+    listOfCapitalAlphabets.lastIndex
 
     //Companion Object extension
     MyClass.printCompanion()
@@ -85,19 +85,20 @@ fun main(){
     //If an extension is declared outside its receiver type, it cannot access the receiver's private or protected members.
 
 }
+
 //declaring extensions as members
 //You can declare extensions for one class inside another class. Inside such an extension, there are multiple implicit receivers - objects whose members can be accessed
 // without a qualifier. An instance of a class in which the extension is declared is called a dispatch receiver, and an instance of the receiver type of the extension
 // method is called an extension receiver.
 
-class Host(val hostname: String) {
+class Host(private val hostname: String) {
     fun printHostname() { print(hostname) }
 }
 
-class Connection(val host: Host, val port: Int) {
-    fun printPort() { print(port) }
+class Connection(private val host: Host, private val port: Int) {
+    private fun printPort() { print(port) }
 
-    fun Host.printConnectionString() {
+    private fun Host.printConnectionString() {
         printHostname()   // calls Host.printHostname()
         print(":")
         printPort()   // calls Connection.printPort()
@@ -114,7 +115,7 @@ class MyClass {
     companion object
 }
 
-fun MyClass.Companion.printCompanion(){
+fun MyClass.Companion.printCompanion() {
     println("Companion Object")
 }
 

@@ -9,26 +9,26 @@ This file contains one example of difference between Nested class and Inner clas
 
 
 
-class TopClass{
-    var someStringVar:String = ""
-    inner class NestedInnerClass{
-        var anotherVar:String = "nested1"
-        fun helloGuys(){
-            println("hello guys!! ${someStringVar}")
+class OuterClass {
+    var outerClassString:String = "Outer class"
+    inner class NestedInnerClass {
+        var nestedInnerClassString: String = "nested inner class"
+        fun sayHelloToOuterClass() {
+            println("hello $outerClassString")
         }
     }
-    class NestedClass{
-        var anotherVar:String = "nested2"
-        fun helloGuys(){
-            println("hello guys!!  ${TopClass().someStringVar}")
+    class NestedClass {
+        var nestedClassString: String = "nested class"
+        fun sayHello() {
+            println("hello ${OuterClass().outerClassString}")
         }
     }
 }
 
 fun main(){
 
-    var tc1 = TopClass.NestedClass().anotherVar
+    var nestedClassStringInOuterClass = OuterClass.NestedClass().nestedClassString
 
     //we have to create an object of outer class to actually access the inner nested class
-    var tc2 = TopClass().NestedInnerClass().helloGuys()
+    OuterClass().NestedInnerClass().sayHelloToOuterClass()      //prints "hello outer class
 }

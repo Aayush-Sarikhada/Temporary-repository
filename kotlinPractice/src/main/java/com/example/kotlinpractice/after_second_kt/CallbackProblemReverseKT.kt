@@ -37,6 +37,7 @@ fun main() {
     Authenticator().isAuthenticate(userName = firstUser.userName) {
         entryPermit = it
     }
+    println(entryPermit)
 
 
 }

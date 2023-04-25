@@ -7,11 +7,11 @@ Updated on: 19 apr 2023
 This file contains example contains notes from functional interfaces.
  */
 
-//functinal interfaces AKA SAM(single abstract method interface)
+//functional interfaces AKA SAM(single abstract method interface)
 
 //example of functional interface
-fun interface IntPredicate{
-    fun accept(i:Int):Boolean
+fun interface IntPredicate {
+    fun accept(i: Int): Boolean
 }
 
 //SAM vs type alias

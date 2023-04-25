@@ -7,31 +7,33 @@ Updated on: 19 apr 2023
 This file contains example and notes of Interfaces in kotlin.
  */
 
-//Note: interfaces in kotlin can have:
+    //Note: interfaces in kotlin can have:
     //1. abstract methods or normal methods
     //2. abstract properties or computed properties(properties with custom getter and setters)
 
 //NOTE: Properties declared in interfaces don't have backing fields
 
 //ex:1
-interface Vehicle{
+interface Vehicle {
     fun run()
     fun stop(){
         println("stopping the vehicle")
     }
-    val maxGear:Int        //abstract property
+    val maxGear: Int     //abstract property
                         //initializers are not allowed
 }
+
 //interface inheritance
 //can provide implementation to abstract members and can add new methods and properties
-interface ElectricVehicle: Vehicle{
-    var batteryCapacityInMW:Int
+interface ElectricVehicle: Vehicle {
+    var batteryCapacityInMW: Int
     override val maxGear: Int get() = 0
 }
 
-class ElectricBike(override var batteryCapacityInMW: Int):ElectricVehicle{
-    var a:Int = 19
+class ElectricBike(override var batteryCapacityInMW: Int): ElectricVehicle {
+    var averageOfElectricBike: Int = 50
     override fun run() {
+        println("electric bike is running...")
     }
 }
 
@@ -41,31 +43,32 @@ Resolving overriding conflicts
 When you declare many types in your supertype list, you may inherit more than one implementation of the same method:
 */
 
-interface A {
-    fun foo() { print("A") }
-    fun bar()
+interface LeftEngine {
+    fun startEngine() { println("Left engine starting") }
+    fun checkEngineCondition()
 }
 
-interface B {
-    fun foo() { print("B") }
-    fun bar() { print("bar") }
+interface RightEngine {
+    fun startEngine() { println("Right engine starting") }
+    fun checkEngineCondition() { println("Right engine condition is ok") }
 }
 
-class C : A {
-    override fun bar() { print("bar") }
+class ImplLeftEngine : LeftEngine {
+    override fun checkEngineCondition() { println("Left engine condition is ok") }
 }
 
-class D : A, B {
-    override fun foo() {
-        super<A>.foo()
-        super<B>.foo()
+class EngineSystem : LeftEngine, RightEngine {
+    override fun startEngine() {
+        super<LeftEngine>.startEngine()
+        super<RightEngine>.startEngine()
     }
-
-    override fun bar() {
-        super<B>.bar()
+    override fun checkEngineCondition() {
+        super<RightEngine>.checkEngineCondition()
     }
 }
 
-fun main(){
-
+fun main() {
+    val aircraftEngineSystem = EngineSystem()
+    aircraftEngineSystem.startEngine()      // prints: Left engine starting
+                                            // right engine starting
 }

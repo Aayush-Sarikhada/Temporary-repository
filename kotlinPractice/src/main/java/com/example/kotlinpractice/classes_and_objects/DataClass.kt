@@ -6,19 +6,6 @@ Updated on: 19 apr 2023
 
 This file contains notes and examples of data classes in kotlin.
  */
-sealed class Office(val name:String){
-    class Individual(s:String):Office(s)
-    class SharedOffice(s:String,val numberOfPeople:Int):Office(s){
-        fun printNumberOfPeopleInOffice(){
-            println("number of people in office: $numberOfPeople")
-        }
-    }
-
-    fun printNameOfOffice(){
-        println("Name of office: $name")
-    }
-}
-
 fun main(){
 
 //    It is not unusual to create classes whose main purpose is to hold data. In such classes, some standard functionality and some utility functions are often mechanically derivable from the data. In Kotlin, these are called data classes and are marked with data:
@@ -69,14 +56,14 @@ fun main(){
 
     data class HttpResponse(val requestCode:Int,val msg:String,val errorMsg:String? = null)
 
-    val person1:Person = Person(
+    val person = Person(
         name = "aayush",
         age = 21
     )
-    person1.money = 1000
-    println(person1.age)
-    println(person1.name)
-    println(person1.money)
+    person.money = 1000
+    println(person.age)
+    println(person.name)
+    println(person.money)
 
     var response = HttpResponse(requestCode = 404,"Page not found")
 }

@@ -25,28 +25,29 @@ This file contains notes and examples of Sealed Classes.
 //In some sense, sealed classes are similar to enum classes: the set of values for an enum type is also restricted, but each enum constant exists only as a single instance, whereas a subclass of a sealed class can have multiple instances, each with its own state.
 
 //Constructors of sealed classes can have one of two visibilities: protected (by default) or private:
-sealed class SomeEnum{
-    object SomeObjectInSomeEnum{
-        var s:String = "hello"
+sealed class Error {
+    object MemoryError {
+        var message: String = "Memory error occurred in OS"
     }
-    class SomeClassInSomeEnum{
-        var s:String = "brother"
+    class ThreadErrorsClass {
+        var message: String = "Thread errors has occurred"
     }
 }
 
 fun main(){
-    val s1 = SomeEnum.SomeObjectInSomeEnum
-    val s2 = SomeEnum.SomeObjectInSomeEnum
-    println(s1.equals(s2))
-    println(s1 === s2)
-    println(s1.s === s2.s)
+    val memoryErrorAtRuntime = Error.MemoryError
+    val memoryErrorAtCompileTime = Error.MemoryError
+
+    println(memoryErrorAtRuntime.equals(memoryErrorAtCompileTime))
+    println(memoryErrorAtRuntime === memoryErrorAtCompileTime)
+    println(memoryErrorAtRuntime.message === memoryErrorAtCompileTime.message)
 
     println()
 
-    val s3 = SomeEnum.SomeClassInSomeEnum()
-    val s4 = SomeEnum.SomeClassInSomeEnum()
-    println(s3.equals(s4))          //different instances
-    println(s3 === s4)              //not referring same instance in memory
-    println(s3.s === s4.s)           //referred types are same
-    println(s3.s == s4.s)           //referred strings values are same
+    val mainThreadError = Error.ThreadErrorsClass()
+    val backGroundThreadError = Error.ThreadErrorsClass()
+    println(mainThreadError.equals(backGroundThreadError))                       //different instances
+    println(mainThreadError === backGroundThreadError)                           //not referring same instance in memory
+    println(mainThreadError.message === backGroundThreadError.message)           //referred types are same
+    println(mainThreadError.message == backGroundThreadError.message)            //referred strings values are same
 }

@@ -15,7 +15,6 @@ fun main() {
     //immutable
     val names = listOf("Ajay,Mehsur,Rick")
 
-
     //set
     //immutable
     val immutableSetOfNumbers = setOf(1, 2, 3, 4, 6, 66, 6, 6, 6)
@@ -51,26 +50,25 @@ fun main() {
     //used functions to collections above
 
     //using builder
-    val mapOfAlphabetCharToPosition = buildMap {
+    val mapOfAlphabetToPosition = buildMap {
         put("a", 1)
         put("b", 2)
         put("c", 3)
     }
-    println(mapOfAlphabetCharToPosition)
+    println(mapOfAlphabetToPosition)
 
     val emptyMap = emptyMap<String, String>()
     val listOfDoubledValues = List(3) { it * 2 }    //or MutableList(){}
     println(listOfDoubledValues)
 
-    val linkedListImplOfList = LinkedList<Int>(listOfDoubledValues)
-    println(linkedListImplOfList)
-    val setWithSize = HashSet<Int>(32)
-
+    val linkedListImplOfDoubledValuesList = LinkedList<Int>(listOfDoubledValues)
+    println(linkedListImplOfDoubledValuesList)
+    val setWithInitialSize = HashSet<Int>(32)
 
     //Iterators
     val numbersIterator = numbers.iterator()
     while (numbersIterator.hasNext())
-        print("${numbersIterator.next()} ")
+        print("${numbersIterator.next()} ")         //prints: 11,12,13
     println()
 
     while (numbersIterator.hasNext()) {
@@ -79,7 +77,7 @@ fun main() {
     }
 
     for (item in numbers)
-        print("$item ")
+        print("$item ")         //prints: 11,12,13
     println()
 
     numbers.forEach {
