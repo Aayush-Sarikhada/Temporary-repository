@@ -5,54 +5,52 @@ import kotlin.properties.Delegates
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 19 apr 2023
+Updated on: 25 apr 2023
 
 This file contains examples of collections Examples in kotlin.
  */
 
-//object temp {
-//    fun printName(){
-//        println(this::class.simpleName)
-//    }
-//}
-
-fun main(){
+fun main() {
 
     val pair = "A" to "B"
+    println(pair)           //prints: (A, B)
 
-    val mylist1 = mutableListOf(1,2,3,4,5,6)
-    Utils.showDiff(mylist1){
-        mylist1[3] = 25
+    val mutableListOfNumbers = mutableListOf(1,2,3,4,5,6)
+
+    Utils.showDiff(mutableListOfNumbers) {      //prints:  before: [1, 2, 3, 4, 5, 6]
+                                                //         after: [1, 2, 3, 25, 5, 6]
+        mutableListOfNumbers[3] = 25
     }
-    Utils.showDiff(mylist1){
-        mylist1.add(3,256)
+
+    Utils.showDiff(mutableListOfNumbers) {                  //prints:  before: [1, 2, 3, 25, 5, 6]
+                                                            //         after: [1, 2, 3, 256, 25, 5, 6]
+        mutableListOfNumbers.add(3,256)
     }
 
     //Read only collections are COVARIANT and Mutable collections are Not COVARIANT
     //Array in kotlin
-    var normalArray = Array<Int>(2){0}          //immutable
-    normalArray[0] = 10
-    normalArray[1] = 11
-    normalArray.plus(9)
-    println(normalArray.size)   //size of array
-    for (iterator in  normalArray.iterator()){
+    val arrayWithFixedSize = Array(2){0}          //immutable
+    arrayWithFixedSize[0] = 10
+    arrayWithFixedSize[1] = 11
+
+    println(arrayWithFixedSize.size)                      //prints: 2
+
+    for (iterator in  arrayWithFixedSize.iterator()){
         print("$iterator ")
     }
-//    for (iterator in  normalArray.indices){
-//        print("$iterator ")
-//    }
+    println()
 
-    var anotherNormalArray = arrayOf(1,2,3,4,5)  //another way to create fixed size mutable array
+    val arrayWithFixedSizeCreatedUsingConstructFunction = arrayOf(1, 2, 3, 4, 5)  //another way to create fixed size mutable array
+    println(arrayWithFixedSizeCreatedUsingConstructFunction)            //prints: 1 2 3 4 5
 
-    var specialIntArray = intArrayOf(1,2,3,4,5,6)  //same as above but only for ints.
-    var firstEvenIndex = specialIntArray.indexOfFirst {
+
+    val specialIntArray = intArrayOf(1,2,3,4,5,6)               //same as above but only for ints.
+    val firstEvenIndex = specialIntArray.indexOfFirst {
         it%2 == 0
     }
-    println(firstEvenIndex)
-
+    println(firstEvenIndex)         //prints: 1
 
     //two types of collections 1. mutable and 2. immutable
-
     val numList1 = mutableListOf<Int>(10,20,30)
     numList1.shuffle()
     var numList2 = listOf<Int>(10,20,30)

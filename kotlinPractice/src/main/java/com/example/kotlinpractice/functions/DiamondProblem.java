@@ -2,110 +2,49 @@ package com.example.kotlinpractice.functions;
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 19 apr 2023
+Updated on: 25 apr 2023
 
 This file contains code for diamond problem given by soham bhai.
  */
 
-interface TopLevelInterfaceTop {
-     int getValue(String f);
+interface Animal {
+        String typeOfAnimal(String nameOfAnimal);
 }
-interface Interface1Mid {
+interface Carnivorous {
+        String getCarnivorous();
+}
 
-      int getValueInterface1() ;
+interface Herbivorous {
+        String getHerbivorous();
 }
-
-interface Interface2Mid {
-    int getValueInterface2() ;
-}
-abstract class AbstractClass  implements TopLevelInterfaceTop,Interface1Mid, Interface2Mid{
+abstract class AnimalType  implements Animal, Carnivorous, Herbivorous{
     @Override
-    public int getValue(String f) {
-        if (f == "first"){
-            return getValueInterface1();
-        }else if (f ==  "second"){
-            return getValueInterface2();
+    public String typeOfAnimal(String nameOfAnimal) {
+        if (nameOfAnimal == "TIGER"){
+            return getCarnivorous();
+        }else if (nameOfAnimal ==  "SHEEP"){
+            return getHerbivorous();
         }
-        return -1;
+        return "Enter valid name of animal (try TIGER or SHEEP)";
     }
 
     @Override
-    public int getValueInterface1() {
-        return 1;
+    public String getCarnivorous() {
+        return "Carnivorous";
     }
 
     @Override
-    public int getValueInterface2() {
-        return 2;
+    public String getHerbivorous() {
+        return "Herbivorous";
     }
 }
-class LowerClass extends AbstractClass{
+class AnimalTypeImpl extends AnimalType{
 
 }
 
-//old tries that did not work
-//interface Interface1 {
-//    default void commonMethod() {
-//        System.out.println("Interface1 method implementation");
-//    }
-//}
-//
-//interface Interface2 {
-//    default void commonMethod() {
-//        System.out.println("Interface2 method implementation");
-//    }
-//}
-//
-//class Implementer implements Interface1, Interface2 {
-//    @Override
-//    public void commonMethod() {
-//        commonMethodImpl(this);
-//    }
-//
-//    private static void commonMethodImpl(Interface1 i) {
-//        i.commonMethod();
-//    }
-//
-//    private static void commonMethodImpl(Interface2 i) {
-//        i.commonMethod();
-//    }
-//}
-//
-//public class Main {
-//    public static void main(String[] args) {
-//        Implementer impl = new Implementer();
-//        impl.commonMethod();
-//    }
-//}
-
-//
-//interface TopLevelClass{
-//    void someFun();
-//}
-//
-//interface FirstMiddleInterface extends TopLevelClass {
-//
-//}
-//
-//interface SecondMiddleInterface extends TopLevelClass {
-//
-//}
-//
-//abstract class HiddenClass implements FirstMiddleInterface, SecondMiddleInterface{
-//    void doSomething(){
-//
-//    }
-//
-//    @Override
-//    public void someFun() {
-//
-//    }
-//}
-//
-//public class DiamondProblem {
-//
-//
-//    public static void main(String[] args) {
-//
-//    }
-//}
+class DiamondProblem{
+    public static void main(String[] args) {
+        AnimalTypeImpl animalTypeGetter = new AnimalTypeImpl();
+        System.out.println(animalTypeGetter.typeOfAnimal("TIGER"));
+    }
+}

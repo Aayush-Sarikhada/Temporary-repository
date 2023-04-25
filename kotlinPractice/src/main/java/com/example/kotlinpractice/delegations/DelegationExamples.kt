@@ -5,82 +5,53 @@ import kotlin.reflect.KProperty
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 19 apr 2023
+Updated on: 25 apr 2023
 
 This file contains examples for delegation in kotlin.
  */
 
 //Ex:3
-class GetterAndSetterForString{
-    operator fun getValue(thisRef:Any?, prop:KProperty<*>):String{
+class CustomGetterAndSettersForString{
+    operator fun getValue(thisRef: Any?, prop: KProperty<*>):String {
         return "$thisRef, thank you for delegating '${prop.name}' to me!"
     }
-    operator fun setValue(thisRef: Any?, prop: KProperty<*>,value:String){
+    operator fun setValue(thisRef: Any?, prop: KProperty<*>,value: String) {
         println("Value $value is assigned to property ${prop.name}")
     }
 }
 
 class ClassForDemoOfGetterSetterForString {
-    var str:String by GetterAndSetterForString()                          //this tells us to either initialize this property or provide getter or getter+setters but we can use delegation here as well
-}
-
-fun String.tell(){
-    println("tell is called!")
-    fun greet(){
-        println("Hello")
-    }
+    var strWithGetterAndSetterDelegated:String by CustomGetterAndSettersForString()                          //this tells us to either initialize this  property or provide getter or                                                                                getter+setters but we can use delegation here as well
 }
 
 class DemoForDelegation{
-    companion object {
-        var someVar:String = "10"
-    }
-    val someValue:String by object {
-        operator fun getValue(thisRef: Any?,prop: KProperty<*>):String{
+    val strWithCustomGetter: String by object {
+        operator fun getValue(thisRef: Any?,prop: KProperty<*>):String {
             return "this is a delegation value"
         }
     }
+
     val laziedValue:Int by lazy {
-        println("adb")
+        println("lazy is called!")
         10
     }
 }
 
-enum class Days{
-    TODAY {
-        override fun hello() {
-            println("Hello Today")
-        }
-    },YESTERDAY {
-        override fun hello() {
-            println("Hello Today")
-        }
-    },TOMORROW {
-        override fun hello() {
-            println("Hello Today")
-        }
-    };
-    abstract fun hello()
-}
-
 fun main(){
 
-    ClassForDemoOfGetterSetterForString().str = "hello"
-    val sr = "abc"
-    sr.tell()
+    ClassForDemoOfGetterSetterForString().strWithGetterAndSetterDelegated = "hello"
 
     println(DemoForDelegation().laziedValue)
 
-
     //  If the initialization of a value throws an exception, it will attempt to reinitialize the value at next access.
-    val lazilyCreatedString:String by lazy {
+    val lazilyCreatedString: String by lazy {
         // under the hood it initializes the property using synchronized (default) way( there are three mods in which lazy can initialize a property ( sychronized, unsafe and safe)
         "hello brother"
     }
-    var someValue:String by Delegates.vetoable("hello"){ _, old, new->              //will change the value only if the returned true from lambda else it will ignore it.
+    var strDelegatedToVetoable: String by Delegates.vetoable("hello") { _, old, new->              //will change the value only if the returned true from lambda else it will ignore it.
         new.length > old.length
     }
-    var someValue2:String by Delegates.observable("hello"){ _, old, new->              //will change the value only if the returned true from lambda else it will ignore it.
+    var strDelegatedToObservable: String by Delegates.observable("hello") { _, old, new->              //will change the value only if the returned true from lambda else it will ignore it.
         new.length > old.length
     }
 }

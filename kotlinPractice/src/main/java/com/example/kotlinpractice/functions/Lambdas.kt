@@ -2,7 +2,7 @@ package com.example.kotlinpractice.functions
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 19 apr 2023
+Updated on: 25 apr 2023
 
 This file contains notes and examples for lambdas in kotlin.
  */
@@ -48,7 +48,6 @@ class IntToDoubleFun: (Int)->Double {
     override fun invoke(p1: Int): Double {
         return p1.toDouble()
     }
-
 }
 
 //

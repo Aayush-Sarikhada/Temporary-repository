@@ -2,49 +2,56 @@ package com.example.kotlinpractice.collections
 
 import java.util.LinkedList
 import kotlin.random.Random
+/*
+Created By: Aayush Sarikhada
+Updated on: 25 apr 2023
 
-//types of collections : list, map and set
+This file contains notes and examples of collections in kotlin
+types of collections : list, map and set
+ */
+
 
 fun main() {
     //list
     //mutable
     val numbers = mutableListOf(11, 12, 13)
     numbers.add(14)
-    println(numbers)
+    println(numbers)    //prints: 11 12 13
 
     //immutable
-    val names = listOf("Ajay,Mehsur,Rick")
-
+    val namesOfFriends = listOf("Ajay,Mehsur,Rick")
+    println(namesOfFriends)     //prints: Ajay Mehsur Rick
     //set
     //immutable
     val immutableSetOfNumbers = setOf(1, 2, 3, 4, 6, 66, 6, 6, 6)
-    println(immutableSetOfNumbers)
+    println(immutableSetOfNumbers)      //prints: 1 2 3 4 6 66          //insertion order is preserved
 
     //mutable
     val mutableSetOfNumbers = mutableSetOf(1, 2, 3, 4, 5)
-    println(mutableSetOfNumbers)
+    println(mutableSetOfNumbers)        //prints: 1 2 3 4 5
     mutableSetOfNumbers.add(35)
+    println(mutableSetOfNumbers)        //prints: 1 2 3 4 5 35
 
     //map
     //immutable
-    val mapOfNumbersToString = mapOf(
+    val mapOfNumbersToTheirStringNames = mapOf(
         1 to "one",
         2 to "two",
         3 to "three",
         4 to "four"
     )
-    println("All keys: ${mapOfNumbersToString.keys}")
-    println("All values: ${mapOfNumbersToString.values}")
+    println("All keys: ${mapOfNumbersToTheirStringNames.keys}")
+    println("All values: ${mapOfNumbersToTheirStringNames.values}")
 
     //mutable
-    val mapOfCountryToCapital = mutableMapOf(
+    val mapOfCountryToTheirCapital = mutableMapOf(
         "India" to "delhi",
         "USA" to "Washington DC",
         "UK" to "London",
         "Canada" to "Ottawa"
     )
-    mapOfCountryToCapital["South Korea"] = "Seoul"
-    println(mapOfCountryToCapital)
+    mapOfCountryToTheirCapital["South Korea"] = "Seoul"
+    println(mapOfCountryToTheirCapital)      //prints: {India=delhi, USA=Washington DC, UK=London, Canada=Ottawa, South Korea=Seoul}
 
     //construct of collections
     //used functions to collections above
@@ -55,20 +62,21 @@ fun main() {
         put("b", 2)
         put("c", 3)
     }
-    println(mapOfAlphabetToPosition)
+    println(mapOfAlphabetToPosition)    //prints: {a=1, b=2, c=3}
 
     val emptyMap = emptyMap<String, String>()
-    val listOfDoubledValues = List(3) { it * 2 }    //or MutableList(){}
-    println(listOfDoubledValues)
+    val listOfDoubledValues = List(3) { it * 2 }    // or MutableList(){}
+    println(listOfDoubledValues)        // prints:   [0, 2, 4]
 
     val linkedListImplOfDoubledValuesList = LinkedList<Int>(listOfDoubledValues)
-    println(linkedListImplOfDoubledValuesList)
+    println(linkedListImplOfDoubledValuesList)  // prints: [0, 2, 4]
     val setWithInitialSize = HashSet<Int>(32)
 
     //Iterators
     val numbersIterator = numbers.iterator()
     while (numbersIterator.hasNext())
-        print("${numbersIterator.next()} ")         //prints: 11,12,13
+        print("${numbersIterator.next()} ")         // prints: 11 12 13
+
     println()
 
     while (numbersIterator.hasNext()) {
@@ -77,51 +85,55 @@ fun main() {
     }
 
     for (item in numbers)
-        print("$item ")         //prints: 11,12,13
+        print("$item ")         // prints: 11 12 13
+
     println()
 
     numbers.forEach {
-        print("$it ")
+        print("$it ")           //prints: 11 12 13
     }
+
     println()
 
     val listIteratorOfNumbers = numbers.listIterator()
     while (listIteratorOfNumbers.hasNext()) {
-        print(listIteratorOfNumbers.next())
+        print(listIteratorOfNumbers.next())     //prints: 111213
     }
+
     println()
 
     while (listIteratorOfNumbers.hasPrevious()) {
-        print("${listIteratorOfNumbers.previous()} ")
+        print("${listIteratorOfNumbers.previous()} ")       //prints: 14 13 12 11
     }
+
     println()
 
     //mutable iterators
-    val listOfNumbersForMutableIteratorDemo = mutableListOf(100,200,300,400,500)
+    val listOfNumbersForMutableIteratorDemo = mutableListOf(100, 200, 300, 400, 500)
     val mutableIterator = listOfNumbersForMutableIteratorDemo.listIterator()
 
-    println("before: $listOfNumbersForMutableIteratorDemo")
+    println("before: $listOfNumbersForMutableIteratorDemo")         //prints: "before: [100, 200, 300, 400, 500]"
     mutableIterator.next()
     mutableIterator.remove()
-    println("after removal $listOfNumbersForMutableIteratorDemo")
+    println("after removal $listOfNumbersForMutableIteratorDemo")   //prints: "after: [200, 300, 400, 500]"
 
     mutableIterator.add(600)
-    println("after adding $listOfNumbersForMutableIteratorDemo")
+    println("after adding $listOfNumbersForMutableIteratorDemo")    //prints: "after adding [600, 200, 300, 400, 500]"
 
     mutableIterator.next()
     mutableIterator.set(900)
-    println("after updating $listOfNumbersForMutableIteratorDemo")
-
+    println("after updating $listOfNumbersForMutableIteratorDemo")  //prints: "after updating [600, 900, 300, 400, 500]"
 
     //Ranges and Progressions
     val rangeFromOneToTwelve = 1..12
-    for(i in rangeFromOneToTwelve){
-        print("$i ")
+    for(i in rangeFromOneToTwelve) {
+        print("$i ")            //prints: 1 2 3 4 5 6 7 8 9 10 11 12
     }
+
     println()
 
     for(i in 4 downTo 1)
-        print("$i ")
+        print("$i ")            //prints: 4 3 2 1
 
     println()
 
@@ -291,7 +303,7 @@ fun main() {
     val filteredIndexed = numberFromOneToFiveAsStrings.filterIndexed{ind,i->
         (ind != 0) && (i.length < 5)
     }
-    val filteredNot = mapOfNumbersToString.filterNot{
+    val filteredNot = mapOfNumbersToTheirStringNames.filterNot{
         it.key <= 3
     }
     println(filteredIndexed)
@@ -621,6 +633,7 @@ fun main() {
         "Bye" to 3,
         "Good morning" to 11
     )
+
     someMapOfStringtoInt + ("Hey" to 3)
     println(someMapOfStringtoInt)
     someMapOfStringtoInt + mapOf("H" to 1,"k" to 1)

@@ -8,47 +8,55 @@ This file contains example for enums.
 */
 
 //ex:1
-enum class Months{
+enum class Months {
     JAN,FAB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC
 }
 
 //ex:2
-enum class RGB(hexValue:String){
+enum class RGB(private val hexValue: String) {
 
     RED("FF0000"),
     GREEN("FF0000"),
     BLUE("FF0000");
 
-    fun printItsName(){
+    fun printColorName(){
         println(this.name)
     }
 
+    fun printHexValue(){
+        println(this.hexValue)
+    }
 }
 
 fun main() {
 
+    val enumObj = Months.valueOf("JAN")                             //throws illegalArgumentException if value doesn't match
 
-    val enumObj = Months.valueOf("JAN")                         //throws illegalArgumentException if value doesn't match
-    println("${enumObj.name} = ${enumObj.ordinal}")
+    println("${enumObj.name} = ${enumObj.ordinal}")                      //JAN = 0
+
     print("name: ")
-    println(enumObj.declaringJavaClass.name)
-    print("canonicalName: ")
-    println(enumObj.declaringJavaClass.canonicalName)
-//    println(enumObj.declaringJavaClass.packageName)           //won't work for below java 9
-    print("simpleName: ")
-    println(enumObj.declaringJavaClass.simpleName)
-    print("typeName: ")
-    println(enumObj.declaringJavaClass.typeName)
+    println(enumObj.declaringJavaClass.name)                             // com.example.kotlinpractice.enums.Months
 
-    val arrayOfEnumsConstants = Months.values()
-    arrayOfEnumsConstants.forEach {
-        println(it.name)
+    print("canonicalName: ")
+    println(enumObj.declaringJavaClass.canonicalName)                    //canonicalName: com.example.kotlinpractice.enums.Months
+//  println(enumObj.declaringJavaClass.packageName)                      //won't work for below java 9
+
+    print("simpleName: ")
+    println(enumObj.declaringJavaClass.simpleName)                       //simpleName: Months
+
+    print("typeName: ")
+    println(enumObj.declaringJavaClass.typeName)                         //typeName: com.example.kotlinpractice.enums.Months
+
+    val arrayOfMonthsEnumsConstants = Months.values()
+    arrayOfMonthsEnumsConstants.forEach {
+        print("${it.name} ")                                             //JAN FAB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC
     }
+    println()
 
     //2
-    val red = RGB.RED.ordinal
+    val ordinalOfRed = RGB.RED.ordinal
     val blue = RGB.BLUE
-    println(red)
-    blue.printItsName()
-
+    println(ordinalOfRed)                           //0
+    blue.printColorName()                           //BLUE
+    println(blue.printHexValue())
 }
