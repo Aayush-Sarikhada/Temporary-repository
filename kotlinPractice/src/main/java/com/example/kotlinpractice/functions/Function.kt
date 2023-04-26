@@ -91,6 +91,7 @@ fun main(){
     //or use spread operator
     println(sumTheseNumbers(*intArrayOf(1,3,6,6,9)))
 
+    //extension function demonstration (getAppendedBy)
     var greetingsForCrowd = "Hello ladies!"
     greetingsForCrowd = greetingsForCrowd getAppendedBy "and gentlemen"
     println(greetingsForCrowd)
