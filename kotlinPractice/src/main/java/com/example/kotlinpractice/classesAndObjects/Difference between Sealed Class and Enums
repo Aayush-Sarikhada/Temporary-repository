@@ -4,4 +4,4 @@
 2. in enums if have associated values for all the constants same also if we
    associate anonymous classes with constants of enum and we provide methods in it then those methods must be overriding/implementing a global (enum level) abstract method.
 
-   3. enum can implement an interface but can't derive from a class.
+3. enum can implement an interface but can't derive from a class.

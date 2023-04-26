@@ -2,16 +2,13 @@ package com.example.kotlinpractice.classesAndObjects
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 24 apr 2023
+Updated on: 26 apr 2023
 
 This file contains notes and examples of data classes in kotlin.
  */
-fun main(){
 
-//    It is not unusual to create classes whose main purpose is to hold data. In such classes, some standard functionality and some utility functions are often mechanically derivable from the data. In Kotlin, these are called data classes and are marked with data:
-//
+// It is not unusual to create classes whose main purpose is to hold data. In such classes, some standard functionality and some utility functions are often mechanically derivable from the data. In Kotlin, these are called data classes and are marked with data:
 //data class User(val name: String, val age: Int)
-
 //    The compiler automatically derives the following members from all properties declared in the primary constructor:
 //
 //      equals()/hashCode() pair
@@ -50,13 +47,15 @@ fun main(){
 //    The compiler only uses the properties defined inside the primary constructor for the automatically generated functions.
 //    To exclude a property from the generated implementations, declare it inside the class body:
 
-    data class Person(val name:String,val age:Int){
-        var money:Int = 0
+fun main() {
+
+    data class Person(val name: String,val age: Int) {
+        var money: Int = 0
     }
 
-    data class HttpResponse(val requestCode:Int,val msg:String,val errorMsg:String? = null)
+    data class HttpResponse(val requestCode: Int, val msg: String, val errorMsg: String? = null)
 
-    val person = Person(
+    val person = Person (
         name = "aayush",
         age = 21
     )
@@ -65,5 +64,6 @@ fun main(){
     println(person.name)
     println(person.money)
 
-    var response = HttpResponse(requestCode = 404,"Page not found")
+    val response = HttpResponse(requestCode = 404,"Page not found")
+    println(response)               // HttpResponse(requestCode=404, msg=Page not found, errorMsg=null)
 }

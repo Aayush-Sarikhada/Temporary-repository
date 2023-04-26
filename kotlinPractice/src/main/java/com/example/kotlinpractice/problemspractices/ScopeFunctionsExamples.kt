@@ -30,29 +30,29 @@ class ReportBuilder {
     fun withTitle(title: String) = apply { this.title = title }
 
     fun section(title: String, block: SectionBuilder.() -> Unit) {
-        val builder = SectionBuilder(title)
-        block.invoke(builder)
-        sections.add(builder.build())
+        val section = SectionBuilder(title)
+        block.invoke(section)
+        sections.add(section.buildSection())
     }
 
-    fun build(): Report {
+    fun buildSection(): Report {
         return Report(title, sections)
     }
 
-    inner class SectionBuilder(val title: String) {
+    inner class SectionBuilder(private val title: String) {
         private val paragraphs = mutableListOf<Report.Section.Paragraph>()
 
-        fun paragraph(text: String) {
+        fun addParagraphToSection(text: String) {
             paragraphs.add(Report.Section.Paragraph(text))
         }
 
-        fun build(): Report.Section {
+        fun buildSection(): Report.Section {
             return Report.Section(title, paragraphs)
         }
     }
 }
 
-fun printReport(report:Report){
+fun printReport(report: Report) {
     print("<-------${report.title}------->").also {
         report.sections.forEach { section->
             println()
@@ -67,30 +67,21 @@ fun printReport(report:Report){
 }
 
 fun main() {
-//    val result = users.filter {
-//        it.email != null
-//    }
-//        .mapNotNull { user ->
-//            user.email?.let {
-//                "${user.name} <$it>"
-//            }
-//        }.sorted()
-//        .joinToString(separator = ", ")
-//    println(result)
     val sum = null + null
     println(sum)
+
     val report = ReportBuilder().apply {
         withTitle("Kotlin Learning")
         section("Classes and Objects") {
-            paragraph("The class declaration consists of the class name, the class header (specifying its type parameters, the primary constructor, and some other things), and the class body surrounded by curly braces. Both the header and the body are optional; if the class has no body, the curly braces can be omitted.")
-            paragraph("A class in Kotlin can have a primary constructor and one or more secondary constructors. The primary constructor is a part of the class header, and it goes after the class name and optional type parameters.")
+            addParagraphToSection("The class declaration consists of the class name, the class header (specifying its type parameters, the primary constructor, and some other things), and the class body surrounded by curly braces. Both the header and the body are optional; if the class has no body, the curly braces can be omitted.")
+            addParagraphToSection("A class in Kotlin can have a primary constructor and one or more secondary constructors. The primary constructor is a part of the class header, and it goes after the class name and optional type parameters.")
         }
         section("Object expressions and declarations") {
-            paragraph("Sometimes you need to create an object that is a slight modification of some class, without explicitly declaring a new subclass for it. Kotlin can handle this with object expressions and object declarations.")
-            paragraph("Object expressions create objects of anonymous classes, that is, classes that aren't explicitly declared with the class declaration. Such classes are useful for one-time use. You can define them from scratch, inherit from existing classes, or implement interfaces. Instances of anonymous classes are also called anonymous objects because they are defined by an expression, not a name.")
-            paragraph("Using anonymous objects as return and value types\n" +
+            addParagraphToSection("Sometimes you need to create an object that is a slight modification of some class, without explicitly declaring a new subclass for it. Kotlin can handle this with object expressions and object declarations.")
+            addParagraphToSection("Object expressions create objects of anonymous classes, that is, classes that aren't explicitly declared with the class declaration. Such classes are useful for one-time use. You can define them from scratch, inherit from existing classes, or implement interfaces. Instances of anonymous classes are also called anonymous objects because they are defined by an expression, not a name.")
+            addParagraphToSection("Using anonymous objects as return and value types\n" +
                     "When an anonymous object is used as a type of a local or private but not inline declaration (function or property), all its members are accessible via this function or property:")
         }
-    }.build()
+    }.buildSection()
     printReport(report)
 }

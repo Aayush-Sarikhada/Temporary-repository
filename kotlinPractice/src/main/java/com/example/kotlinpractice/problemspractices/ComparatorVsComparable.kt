@@ -1,5 +1,8 @@
 package com.example.kotlinpractice.problemspractices
 
+import java.util.*
+import kotlin.Comparator
+
 /*
 Created By: Aayush Sarikhada
 Updated on: 19 apr 2023
@@ -7,30 +10,64 @@ Updated on: 19 apr 2023
 This file contains example for different implementation of comparator and comparable interfaces.
  */
 
-class Student(val id:Int,val name:String): Comparator<Student>{
+/*
+Comparable is meant for objects with natural ordering which means the object itself must know how it is to be ordered. For example Roll Numbers of students.
+Whereas, Comparator interface sorting is done through a separate class.
+Logically, Comparable interface compares “this” reference with the object specified and Comparator in Java compares two different class objects provided.
+*/
+
+data class Student(val id: Int, val name: String)
+class CompareByIdAndName: Comparator<Student>{
     override fun compare(p0: Student?, p1: Student?): Int {
-        if(p0 == null || p1 == null){
+        if(p0 == null || p1 == null) {
             throw IllegalArgumentException()
         }
-        return if(p0.id == p1.id) 0
-            else if(p0.id > p1.id) 1
-                else -1
+        return if(p0.id == p1.id) 0 else if(p0.id > p1.id) 1 else -1
     }
-
 }
 
-class Employee(val id:Int,val name:String): Comparable<Employee>{
+data class Employee(val id: Int, val name: String,val salary: Int): Comparable<Employee> {           //naturally sortable using id
     override fun compareTo(other: Employee): Int {
-        return if(this.id == other.id) return 0
-            else if(this.id > other.id) return 1
-             else return -1
+        return if(id == other.id)  0 else if(id > other.id)  1 else  -1
+    }
+}
+
+class CompareBySalary: Comparator<Employee> {
+    override fun compare(p0: Employee?, p1: Employee?): Int {
+        if(p0 == null || p1 == null) {
+            throw IllegalArgumentException()
+        }
+        return if(p0.salary == p1.salary) 0 else if(p0.salary > p1.salary) 1 else -1
     }
 }
 
 fun main() {
-    val listOfUsers = listOf<Student>(
-        Student(1,"Aayush"),
-        Student(2,"atul"),
-        Student(3,"Aniket")
+    val listOfStudents = listOf(
+        Student(2,"Atul"),
+        Student(3,"Aniket"),
+        Student(1,"Aayush")
     )
+
+    Collections.sort(listOfStudents,CompareByIdAndName())
+    listOfStudents.forEach {                    //prints:  Student(id=1, name=Aayush)
+                                                         //         Student(id=2, name=Atul)
+                                                         //         Student(id=3, name=Aniket)
+        println(it)
+    }
+
+    val listOfOfficeEmploees = listOf(
+        Employee(1,"Jack", 25000),
+        Employee(2,"Lisa", 20000),
+        Employee(3,"John", 15000),
+        Employee(4,"Ajay", 10000)
+    )
+    Collections.sort(listOfOfficeEmploees,CompareBySalary())
+    listOfOfficeEmploees.forEach {                //prints:  Employee(id=4, name=Ajay, salary=10000)
+        println(it)                                         //Employee(id=3, name=John, salary=15000)
+                                                            //Employee(id=2, name=Lisa, salary=20000)
+                                                            //Employee(id=1, name=Jack, salary=25000)
+    }
+
+
+
 }

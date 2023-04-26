@@ -9,7 +9,7 @@ This file contains example to check difference between interable vs sequence.
 
 data class Person(val id:Int,val name:String)
 
-val list1 = listOf(
+val personList = listOf(
     Person(1,"Eren"),
     Person(2,"Bertold"),
     Person(3,"Mikasa"),
@@ -18,25 +18,25 @@ val list1 = listOf(
 )
 
 fun main() {
-    println(list1)
+    println(personList)
 
-    //interable
-    val names = list1.filter {
+    //iterable
+    val namesLongerThanFour = personList.filter {
+        println("filter called for iterable")
         it.name.length > 4
     }.map {
+        println("map called for iterable")
         it.name
     }
-    println(names)
+    println(namesLongerThanFour)
 
-    val names2 = list1.asSequence().filter {
-        it.name.length >4
+    //Sequence
+    val namesLongerThanTwo = personList.asSequence().filter {
+        println("filter called for sequence")
+        it.name.length > 2
     }.map {
+        println("map called for sequence")
         it.name
     }.toList()
-    println(names2)
-
-    generateSequence(1) { n -> n * 2 }
-        .take(20)
-        .forEach(::println)
-
+    println(namesLongerThanTwo)
 }

@@ -80,15 +80,15 @@ fun main() {
     }
 
     //referential equality and structural equality
-    val names1 = setOf("ayush", "aniket", "atul")
-    val names2 = setOf("ayush", "aniket", "atul")
-    val name3From1 = names1
+    val teamMates = setOf("ayush", "aniket", "atul")
+    val colleagues = setOf("ayush", "aniket", "atul")
+    val teamMatesLedger = teamMates
 
-    println(names1 == names2)       //checks if contents are same
-    println(names1 === names2)      //checks if refers to the same object in memory
-    println(names1 === name3From1)  //gives true since name3From1 is initialized from name1
+    println(teamMates == colleagues)        //checks if contents are same
+    println(teamMates === colleagues)       //checks if refers to the same object in memory
+    println(teamMates === teamMatesLedger)  //gives true since name3From1 is initialized from name1
 
-    println(names1 == names2)  //"==" jevu j
+    println(teamMates == colleagues)
 
     //data types
     val a: Int = 100
@@ -132,16 +132,15 @@ fun main() {
     //did not understand : Unsigned numbers are implemented as inline classes with the single storage property of the corresponding signed counterpart type of the same width. Nevertheless, changing type from unsigned type to signed counterpart (and vice versa) is a binary incompatible change.
 
 
-//
 //    Raw strings can contain newlines and arbitrary text. It is delimited by a triple quote ("""), contains no escaping and can contain newlines and any other characters:
 //
-//val text = """
+//    val text = """
 //    for (c in "foo")
 //        print(c)
 //    """
-//To remove leading whitespace from raw strings, use the trimMargin() function:
+//    To remove leading whitespace from raw strings, use the trimMargin() function:
 //
-//val text = """
+//    val text = """
 //    |Tell me and I forget.
 //    |Teach me and I remember.
 //    |Involve me and I learn.

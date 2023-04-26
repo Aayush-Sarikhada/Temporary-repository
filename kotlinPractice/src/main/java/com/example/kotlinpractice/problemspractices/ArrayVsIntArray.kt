@@ -8,18 +8,21 @@ This file contains example to check difference between interable vs sequence.
  */
 
 fun main() {
-    val arrayInt:Array<Int> = Array(10){
-       0
-    }               //explicitly zero is initialized                //internally "Interger[]" type
+    val arrayOfInteger: Array<Int> = Array(10){ 0 }                //explicitly zero is initialized
+                                                                        // internally "Interger[]" type
 
-    val intArray = IntArray(10)         //by default 0 is initialized           //internally "int[]" type
-    arrayInt.forEach {
-        print("$it ")
-    };println()
+    val arrayOfInt = IntArray(10)                                  //by default 0 is initialized
+                                                                        // internally "int[]" type
 
-    intArray.forEach {
+    arrayOfInteger.forEach {
         print("$it ")
-    };println()
+    }
+    println()
+
+    arrayOfInt.forEach {
+        print("$it ")
+    }
+    println()
 
 
 

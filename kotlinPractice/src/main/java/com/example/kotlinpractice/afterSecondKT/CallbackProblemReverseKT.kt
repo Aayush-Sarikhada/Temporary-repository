@@ -1,41 +1,40 @@
 package com.example.kotlinpractice.afterSecondKT
 
-
 /*
 Created By: Aayush Sarikhada
 Updated on: 19 apr 2023
-
 This file contains callback problem solution given by prembhai in reverse KT.
- */
+*/
 
-//problem given in second KT (related to callbacks)
-data class User(val firstName:String, val secondName:String) {
+// problem given in second KT (related to callbacks)
+
+//TODO: add enum for response
+data class User(val firstName: String, val secondName: String) {
     val userName:String = "$firstName@$secondName"
-
 }
 
 class ApiService {
-    fun getResponseWithDelay(userName:String, callBack:(String)->Unit) {
+    fun getResponseWithDelay(userName: String, response: (String) -> Unit) {
         if(userName == "Aayush@Sarikhada")
-            callBack("AVAILABLE")
+            response("AVAILABLE")
         else
-            callBack("NOT-AVAILABLE")
+            response("NOT-AVAILABLE")
     }
-
 }
+
 class Authenticator {
-    inline fun isAuthenticate(userName: String, crossinline callBack:(String)->Unit) {
+    inline fun authenticate(userName: String, crossinline onResponse:(String)->Unit) {
        ApiService().getResponseWithDelay(userName){
-           callBack(it)
+           onResponse(it)
        }
     }
 }
+
 fun main() {
     var entryPermit = "NO-DATA"
-    val firstUser = User("Aayush", "Sarikhada")
-    Authenticator().isAuthenticate(userName = firstUser.userName) {
+    val user = User("Aayush", "Sarikhada")
+    Authenticator().authenticate(userName = user.userName) {
         entryPermit = it
     }
     println(entryPermit)
-
 }

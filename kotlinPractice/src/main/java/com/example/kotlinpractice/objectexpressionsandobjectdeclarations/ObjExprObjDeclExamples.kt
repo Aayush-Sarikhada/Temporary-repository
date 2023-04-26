@@ -1,29 +1,32 @@
 package com.example.kotlinpractice.objectexpressionsandobjectdeclarations
 
-
-class C {
-    private  fun getObject() = object {
-        val xString: String = "x"
-    }
-    fun printX() {
-        println(getObject().xString)
+//object declaration example
+object God {
+    fun takeBlessings() {
+        println("getting god's blessings")
     }
 }
 
-//object declarations
-//normal data class
-data class Car(val name:String,val numOfWheels:Int)
-
-object Bmw {
-    val name:String = "Car"
-    override fun toString(): String {
-        return "BMW car"
-    }
-
+interface MouseEvenHandler {
+    fun onLeftButtonClicked()
+    fun onRightButtonClicked()
 }
 
 fun main() {
-    C().printX()
+    val allah = God
+    val christ = God
+    print(allah == christ)
 
-    println(Bmw)
+    //object expression example
+    val mouseEvenHandler = object: MouseEvenHandler {
+        override fun onLeftButtonClicked() {
+            println("left button clicked")
+        }
+
+        override fun onRightButtonClicked() {
+            println("right button clicked")
+        }
+    }
+    mouseEvenHandler.onRightButtonClicked()
+    mouseEvenHandler.onLeftButtonClicked()
 }
