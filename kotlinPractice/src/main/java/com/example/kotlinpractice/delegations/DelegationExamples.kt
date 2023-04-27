@@ -5,14 +5,14 @@ import kotlin.reflect.KProperty
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 25 apr 2023
+Updated on: 27 apr 2023
 
 This file contains examples for delegation in kotlin.
  */
 
 //Ex:3
-class CustomGetterAndSettersForString{
-    operator fun getValue(thisRef: Any?, prop: KProperty<*>):String {
+class CustomGetterAndSettersForString {
+    operator fun getValue(thisRef: Any?, prop: KProperty<*>): String {
         return "$thisRef, thank you for delegating '${prop.name}' to me!"
     }
     operator fun setValue(thisRef: Any?, prop: KProperty<*>,value: String) {

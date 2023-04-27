@@ -2,107 +2,58 @@ package com.example.kotlinpractice.classesAndObjects
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 24 apr 2023
+Updated on: 27 apr 2023
 
 This file contains examples of Inheritance in kotlin.
  */
 
+// by default interface's members are open
 interface Shape {
     val vertices: Int
-}
-class Rectangle(override val vertices: Int = 4): Shape
 
-class Polygon(override var vertices: Int = 0): Shape
-
-open class BaseClass(var name: String){
-    init {
-        println("primary of base class")
-    }
-    open val size: Int =
-        name.length.also { println("initializing size property in base class....") }
-}
-
-class ChildClass (
-    name: String,
-    lastName: String
-): BaseClass(name) {
-    init {
-        println("primary of child class")
-    }
-
-    override val size: Int = (super.size + lastName.length).also { println("initializing child class") }
-}
-//This means that when the base class constructor is executed, the properties declared or overridden in the derived class have not yet been initialized.   Using any of those properties in the base class initialization logic (either directly or indirectly through another overridden open member implementation) may lead to incorrect behavior or a runtime failure. When designing a base class, you should therefore avoid using open members in the constructors, property initializers, or init blocks.
-//
-
-
-//overriding rules in kotlin------------------------>
-//In Kotlin, implementation inheritance is regulated by the following rule: if a class inherits multiple implementations of the same member from its immediate superclasses, it must override this member and provide its own implementation (perhaps, using one of the inherited ones).
-//ex:
-open class ShapeWithDraw() {
-    open fun draw() {
-        println("drawing from ShapeWithDraw")
-    }
-}
-
-//by default interface's members are open
-interface ShapeInterface {
     fun draw() {
-        println("drawing with ShapeInterface")
+        println("drawing with shape interface")
     }
 }
-
-//overriding rules ( if inheriting from multiple parents with same method name than we have to provide a new implementation in child class
-class InheritedClass: ShapeWithDraw(), ShapeInterface {
+class Rectangle(override val vertices: Int = 4): Shape {
     override fun draw() {
-        super<ShapeInterface>.draw()
-        super<ShapeWithDraw>.draw()
+        println("drawing rectangle")
     }
 }
 
-//custom getters and setters and backing fields
-class Mobile {
-    var price:Int = 10000        //initializer assigns a backing field (called "field" directly so if we want to use backing field we have to initialize the property first)
-        set(value) {
-            field = value / 10      //here using "price" instead of "field" will cause a recursive situation
-        }
-    //field identifier can only be used in the accessor of the property
+class Polygon(override var vertices: Int): Shape {
+    override fun draw() {
+        println("drawing polygon with $vertices vertices")
+    }
 }
 
-//A backing field will be generated for a property if it uses the default implementation of at least one of the accessors, or if a custom accessor references it through the field identifier.
-//
-//For example, there would be no backing field in the following case:
-//
-//val isEmpty: Boolean
-//    get() = this.size == 0
+// overriding rules in kotlin------------------------>
+// In Kotlin, implementation inheritance is regulated by the following rule: if a class inherits multiple implementations of the same member from its immediate superclasses, it must override this member and provide its own implementation (perhaps, using one of the inherited ones).
+// ex:
 
-//backing properties
-class Tree(val treeName: String) {
-    private var _age:Int = 100
-    var treeAge:Int
-        get() = _age*10
-        set(value) {
-            _age = value/10
-        }
+open class GeometricShape() {
+    open fun draw() {
+        println("drawing a geometric shape")
+    }
 }
 
-//
-//To check whether a lateinit var has already been initialized, use .isInitialized on the reference to that property:
-//
-//if (foo::bar.isInitialized) {
-//    println(foo.bar)
-//}
+// overriding rules ( if inheriting from multiple parents with same method name than we have to provide a new implementation in child class
+class Circle(override val vertices: Int = 0) : GeometricShape(), Shape {
+    override fun draw() {
+        super<Shape>.draw()
+        super<Shape>.draw()
+        println("drawing a circle")
+    }
+}
 
-fun main(){
-//    You can also override a val property with a var property, but not vice versa. This is allowed because a val property essentially declares a get method, and overriding it as a var additionally declares a set method in the derived class.
-//    Note that you can use the override keyword as part of the property declaration in a primary constructor:
+fun main() {
+// You can also override a val property with a var property, but not vice versa. This is allowed because a val property essentially declares a get method, and overriding it as a var additionally declares a set method in the derived class.
+// Note that you can use the override keyword as part of the property declaration in a primary constructor:
 
-    InheritedClass().draw()             //prints: "drawing with ShapeWithDraw"
+    Circle().draw()                     //prints: "drawing with ShapeWithDraw"
                                         // "drawing with shapeInterface
 
-    val oakTree = Tree("oak tree")
-    println(oakTree.treeName)
-    println(oakTree.treeAge)
-
+    println(Rectangle().vertices)               // 4
+    println(Polygon(5).vertices)         // 5
 
 }

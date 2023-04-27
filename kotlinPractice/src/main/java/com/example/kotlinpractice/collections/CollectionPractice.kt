@@ -4,7 +4,7 @@ import java.util.LinkedList
 import kotlin.random.Random
 /*
 Created By: Aayush Sarikhada
-Updated on: 25 apr 2023
+Updated on: 27 apr 2023
 
 This file contains notes and examples of collections in kotlin
 types of collections : list, map and set
@@ -19,7 +19,7 @@ fun main() {
     println(numbers)    //prints: 11 12 13
 
     //immutable
-    val namesOfFriends = listOf("Ajay,Mehsur,Rick")
+    val namesOfFriends = listOf("Ajay, Mehsur, Rick")
     println(namesOfFriends)     //prints: Ajay Mehsur Rick
     //set
     //immutable
@@ -50,6 +50,7 @@ fun main() {
         "UK" to "London",
         "Canada" to "Ottawa"
     )
+
     mapOfCountryToTheirCapital["South Korea"] = "Seoul"
     println(mapOfCountryToTheirCapital)      //prints: {India=delhi, USA=Washington DC, UK=London, Canada=Ottawa, South Korea=Seoul}
 
@@ -65,11 +66,13 @@ fun main() {
     println(mapOfAlphabetToPosition)    //prints: {a=1, b=2, c=3}
 
     val emptyMap = emptyMap<String, String>()
+
     val listOfDoubledValues = List(3) { it * 2 }    // or MutableList(){}
     println(listOfDoubledValues)        // prints:   [0, 2, 4]
 
     val linkedListImplOfDoubledValuesList = LinkedList<Int>(listOfDoubledValues)
     println(linkedListImplOfDoubledValuesList)  // prints: [0, 2, 4]
+
     val setWithInitialSize = HashSet<Int>(32)
 
     //Iterators
@@ -137,97 +140,100 @@ fun main() {
 
     println()
 
-    for(i in 1..100 step 10) print("$i ")
+    for(i in 1..100 step 10) print("$i ")           //prints: 1 11 21 31 41 51 61 71 81 91
     println()
 
-    for(i in 10 downTo 1 step 2) print("$i ")
+    for(i in 10 downTo 1 step 2) print("$i ")       //prints: 10 8 6 4 2
     println()
 
-    //Sequence
-    //Constructing Sequences
+    // Sequence
+    // Constructing Sequences
 
-    //from elements
+    // from elements
     val numberSequence = sequenceOf("Four","Three", "Two", "One")
 
-    //from iterable
+    // from iterable
     val numberSequenceFromNumbersList = numbers.asSequence()
 
     //from a function
     //creates infinite sequence but lazily
-    val oddNumbers = generateSequence(1){it+2}
+    val oddNumbers = generateSequence(1){ it + 2 }
     println(oddNumbers.take(5).toList())
 
     //to create finite return null
-    val oddNumbersLessThan10 = generateSequence(1) { if(it<8) it+2 else null  }
+    val oddNumbersLessThan10 = generateSequence(1) { if(it < 8) it + 2 else null }
     println(oddNumbersLessThan10)
 
     //from chunks
     val oddNumbersFromChunks = sequence {
         yield(1)
         yieldAll(listOf(3,5))
-        yieldAll(generateSequence(7){it+2})
+        yieldAll(generateSequence(7){ it + 2 })
     }
     println(oddNumbersFromChunks.take(5).toList())
 
+    // extension functions
+    // 1. Transformations
+    // 2. Filtering
+    // 3. Plus and Minus
+    // 4. Grouping
+    // 5. Retrieving collection parts
+    // 6. Retrieving single elements
+    // 7. Ordering
+    // 8. Aggregate operations
+    // doesn't change the original collection
 
-    //extension functions
-    //1. Transformations
-    //2. Filtering
-    //3. Plus and Minus
-    //4. Grouping
-    //5. Retrieving collection parts
-    //6. Retrieving single elements
-    //7. Ordering
-    //8. Aggregate operations
-    //doesn't change the original collection
-
-    //filter extension function
+    // filter extension function
     var numberFromOneToFiveAsStrings = listOf("One","Two","Three","Four","Five")
     numberFromOneToFiveAsStrings.filter{
         it.length > 3
     }
-    println("numbers are still $numberFromOneToFiveAsStrings")
+    println("numbers are still $numberFromOneToFiveAsStrings")// prints: Numbers are still [One, Two, Three, Four, Five]
+
     val longerThan3 = numberFromOneToFiveAsStrings.filter {
         it.length > 3
     }
-    println("Numbers longer than 3 chars are $longerThan3")
+    println("Numbers longer than 3 chars are $longerThan3")  // prints: Numbers longer than 3 chars are [Three, Four, Five]
 
     //Operations with destinations (they have "To" postfix)
-    val filteredResults = mutableListOf<String>()       //destination
+    val filteredResults = mutableListOf<String>()            // destination
     numberFromOneToFiveAsStrings.filterTo(filteredResults){
         it.length > 3
     }
+
     //they append the result so above and below both are stored in destination here
     numberFromOneToFiveAsStrings.filterIndexedTo(filteredResults){index,_->
         index == 0
     }
-    println(filteredResults)
+    println(filteredResults)                                // prints: [Three, Four, Five, One]
 
     val result = numberFromOneToFiveAsStrings.mapTo(HashSet()){
         it.length
     }
-    println("distinct item length are $result")
+    println("distinct item length are $result")             // prints: distinct item length are [3, 4, 5]
 
     //sort and sorted
     val sortedNumbers = numberFromOneToFiveAsStrings.sorted()
-    println(numberFromOneToFiveAsStrings == sortedNumbers)
+    println(numberFromOneToFiveAsStrings == sortedNumbers)  // prints: false
+
     numberFromOneToFiveAsStrings = numberFromOneToFiveAsStrings.toMutableList()
     numberFromOneToFiveAsStrings.sort()
-    println(numberFromOneToFiveAsStrings == sortedNumbers)
+    println(numberFromOneToFiveAsStrings == sortedNumbers)  // prints: true
 
 
-    //Collection transformation operations
-    //1. Mapping transformation
+    // Collection transformation operations
+    // 1. Mapping transformation
     val setOfNumbersToBeUsedInTransformations = setOf(1,2,3,4,5,6,7)
-    println(setOfNumbersToBeUsedInTransformations.map{it*4})
-    println(setOfNumbersToBeUsedInTransformations.mapIndexed{ ind, i->
-        ind*i
+    println(setOfNumbersToBeUsedInTransformations.map{ it * 4 })        // prints: [4, 8, 12, 16, 20, 24, 28]
+    println(setOfNumbersToBeUsedInTransformations.mapIndexed{ ind, i->  // prints: [0, 2, 6, 12, 20, 30, 42]
+        ind * i
     })
 
-    println(setOfNumbersToBeUsedInTransformations.mapNotNull {
-        if(it == 2) null else it*4
+    println(setOfNumbersToBeUsedInTransformations.mapNotNull {     // prints: [4, 12, 16, 20, 24, 28]
+        if(it == 2) null else it * 4
     })
-    println(setOfNumbersToBeUsedInTransformations.mapIndexedNotNull{ ind, i->
+
+    println(setOfNumbersToBeUsedInTransformations.mapIndexedNotNull{ ind, i->   // prints: [2, 3, 4, 5, 6, 7]
         if(ind == 0) null else i
     })
 
@@ -237,10 +243,12 @@ fun main() {
         "key2" to 2,
         "key3" to 3
     )
-    println(numbersMap.mapKeys {
+
+    println(numbersMap.mapKeys {    //prints: {KEY1=1, KEY2=2, KEY3=3}
         it.key.uppercase()
     })
-    println(numbersMap.mapValues {
+
+    println(numbersMap.mapValues {  //prints: {key1=5, key2=6, key3=7}
         it.value + it.key.length
     })
 

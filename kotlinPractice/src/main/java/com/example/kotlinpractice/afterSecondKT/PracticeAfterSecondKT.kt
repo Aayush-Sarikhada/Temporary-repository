@@ -2,9 +2,10 @@ package com.example.kotlinpractice.afterSecondKT
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 19 apr 2023
+Updated on: 27 apr 2023
+
 This file contains practices i did after my SecondKT of kotlin language.
- */
+*/
 
 interface Months {
     fun getDays(): Int

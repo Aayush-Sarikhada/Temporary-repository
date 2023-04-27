@@ -2,29 +2,29 @@ package com.example.kotlinpractice.classesAndObjects
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 25 apr 2023
+Updated on: 27 apr 2023
 
 This file contains example and notes of Interfaces in kotlin.
- */
+*/
 
-    //Note: interfaces in kotlin can have:
-    //1. abstract methods or normal methods
-    //2. abstract properties or computed properties(properties with custom getter and setters)
+// Note: interfaces in kotlin can have:
+// 1. abstract methods or normal methods
+// 2. abstract properties or computed properties(properties with custom getter and setters)
 
-//NOTE: Properties declared in interfaces don't have backing fields
+// NOTE: Properties declared in interfaces don't have backing fields
 
-//ex:1
+// Ex:1
 interface Vehicle {
     fun run()
-    fun stop(){
+    fun stop() {
         println("stopping the vehicle")
     }
     val maxGear: Int     //abstract property
                          //initializers are not allowed
 }
 
-//interface inheritance
-//can provide implementation to abstract members and can add new methods and properties
+// interface inheritance
+// can provide implementation to abstract members and can add new methods and properties
 interface ElectricVehicle: Vehicle {
     var batteryCapacityInMW: Int
     override val maxGear: Int get() = 0
@@ -37,11 +37,8 @@ class ElectricBike(override var batteryCapacityInMW: Int): ElectricVehicle {
     }
 }
 
-//resolving conflicts
-/*
-Resolving overriding conflicts
-When you declare many types in your supertype list, you may inherit more than one implementation of the same method:
-*/
+// Resolving overriding conflicts
+// When you declare many types in your supertype list, you may inherit more than one implementation of the same method:
 interface LeftEngine {
     fun startEngine() { println("Left engine starting") }
     fun checkEngineCondition()
@@ -62,7 +59,7 @@ class EngineSystem : LeftEngine, RightEngine {
         super<RightEngine>.startEngine()
     }
     override fun checkEngineCondition() {
-        super<RightEngine>.checkEngineCondition()
+        super.checkEngineCondition()
     }
 }
 

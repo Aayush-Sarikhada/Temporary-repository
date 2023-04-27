@@ -5,15 +5,27 @@ import kotlin.reflect.KProperty
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 25 apr 2023
+Updated on: 27 apr 2023
 
 This file contains example for Delegating Properties.
  */
 
-class CustomImplOfLazyClass<T>(override val value: T) : Lazy<T> {
-    override fun isInitialized() = true
+class CustomImplOfLazyClass<T>(initializer: () -> T) : Lazy<T> {
+
+    private var initializer: (() -> T)? = initializer
+    private var _value: Any? = null
+    override val value: T
+        get() {
+            if(_value == null) {
+                _value = initializer!!()
+                initializer = null
+            }
+            return _value as T
+        }
+    override fun isInitialized() = (_value != null)
 
     operator fun getValue(thisRef:Any?,prop:KProperty<*>): T {
+        println()
         return value
     }
 }
@@ -41,7 +53,13 @@ class CustomImplOfObservableProperty<T>(private val initialValue: T,
 }
 
 fun main(){
-    var observableStrObject:String by CustomImplOfObservableProperty("init", mAfterChange = { _, old, new->
+
+    val lazyInt by CustomImplOfLazyClass {
+        10
+    }
+    println(lazyInt)        // prints: 10
+
+    var observableStrObject: String by CustomImplOfObservableProperty("init", mAfterChange = { _, old, new->
         println("$old -> $new")
     }, mBeforeChange = {prop,old,new->
         println("before change")

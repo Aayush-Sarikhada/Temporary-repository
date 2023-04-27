@@ -2,7 +2,8 @@ package com.example.kotlinpractice
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 24 apr 2023
+Updated on: 27 apr 2023
+
 This file contains notes and examples of classes in kotlin.
 */
 
@@ -21,16 +22,16 @@ fun main() {
         }
 
         val dog = Animal(name = "dog")
-        dog.name                                //we can only have a constructor parameter as property if we have prefixed it in constructor as val/var
+        dog.name                                // we can only have a constructor parameter as property if we have prefixed it in constructor as val/var
                                                 // or if we assign it in a property in init block other wise they are only available in init block
-                                                //If the constructor has annotations or visibility modifiers, the constructor keyword is required and the modifiers go before it:
-                                                //class Customer public @Inject constructor(name: String) { /*...*/ }
-                                                //secondary constructors
-                                                //If the class has a primary constructor, each secondary constructor needs to delegate to the primary constructor, either directly or indirectly through another secondary constructor(s). Delegation to another constructor of the same class is done using the this keyword:
+                                                // If the constructor has annotations or visibility modifiers, the constructor keyword is required and the modifiers go before it:
+                                                // class Customer public @Inject constructor(name: String) { /*...*/ }
+                                                // secondary constructors
+                                                // If the class has a primary constructor, each secondary constructor needs to delegate to the primary constructor, either directly or indirectly through another secondary constructor(s). Delegation to another constructor of the same class is done using the this keyword:
         class Person(val name: String) {
             var age: Int = 0
 
-            init{                                       //just like the body of primary constructor
+            init{                               //just like the body of primary constructor
                 println("primary constructor ran")
             }
             constructor(name: String, age: Int): this(name) {

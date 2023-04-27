@@ -2,7 +2,7 @@ package com.example.kotlinpractice.classesAndObjects
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 24 apr 2023
+Updated on: 27 apr 2023
 
 This file contains examples of enums in kotlin.
 */

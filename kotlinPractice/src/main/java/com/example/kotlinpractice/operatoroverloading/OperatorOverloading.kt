@@ -5,7 +5,7 @@ data class Point(val x: Int,val y: Int){
     operator fun unaryPlus() = Point(+x,+y)
 }
 
-class Object(var objName: String) {
+class Car(var objName: String) {
     // Overloading the function
     operator fun plus(data: Int) {
         objName = "Name is $objName and data is $data"
@@ -25,7 +25,7 @@ fun main() {
     println(point.unaryMinus())
     println(point)
 
-    val obj = Object("obj")
-    println(obj + 10)                   //prints: "Name is obj and data is 10"
+//    val obj = Object("obj")
+//    println(obj + 10)                   //prints: "Name is obj and data is 10"
 }
 

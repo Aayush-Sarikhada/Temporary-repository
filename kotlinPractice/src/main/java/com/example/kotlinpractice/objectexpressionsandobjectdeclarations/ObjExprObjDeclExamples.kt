@@ -15,7 +15,7 @@ interface MouseEvenHandler {
 fun main() {
     val allah = God
     val christ = God
-    print(allah == christ)
+    print(allah === christ)
 
     //object expression example
     val mouseEvenHandler = object: MouseEvenHandler {
