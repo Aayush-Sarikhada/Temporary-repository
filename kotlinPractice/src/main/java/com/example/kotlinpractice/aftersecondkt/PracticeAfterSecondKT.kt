@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.afterSecondKT
+package com.example.kotlinpractice.aftersecondkt
 
 /*
 Created By: Aayush Sarikhada
@@ -10,6 +10,7 @@ This file contains practices i did after my SecondKT of kotlin language.
 interface Months {
     fun getDays(): Int
 }
+
 enum class FirstTwoMonths: Months {
     JAN {
         override fun getDays(): Int {
@@ -31,9 +32,9 @@ value class Password(private val pass: String) {
     }
 }
 
-fun main(){
-    val arrayOne = Array(10){0}
-    val arrayTwo = Array(10){0}
+fun main() {
+    val arrayOne = Array(10){ 0 }
+    val arrayTwo = Array(10){ 0 }
     println(arrayOne === arrayTwo)
     println(arrayOne.contentEquals(arrayTwo))
 

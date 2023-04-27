@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.afterSecondKT
+package com.example.kotlinpractice.aftersecondkt
 
 /*
 Created By: Aayush Sarikhada
@@ -8,15 +8,14 @@ This file contains callback problem solution given by prembhai in reverse KT.
 */
 
 // problem given in second KT (related to callbacks)
-
-//TODO: add enum for response
-enum class Response{
+enum class Response {
     AVAILABLE,
     NOT_AVAILABLE,
     NO_DATA
 }
+
 data class User(val firstName: String, val secondName: String) {
-    val userName:String = "$firstName@$secondName"
+    val userName: String = "$firstName@$secondName"
 }
 
 class ApiService {

@@ -5,7 +5,7 @@ Created By: Aayush Sarikhada
 Updated on: 24 apr 2023
 
 This file contains code and notes for Extensions functions.
- */
+*/
 
 // declaring extensions as members
 // You can declare extensions for one class inside another class. Inside such an extension, there are multiple implicit receivers - objects whose members can be accessed
@@ -31,14 +31,13 @@ class Connection(private val host: Host, private val port: Int) {
     }
 }
 
-//extension properties
-//since we don't add anything in class using extension, properties don't have backing field and there for in extension properties initializers are not allowed
+// extension properties
+// since we don't add anything in class using extension, properties don't have backing field and there for in extension properties initializers are not allowed
 
 val <T> List<T>.lastIndex: Int
     get() = size - 1
 
 fun main() {
-
     //generic
     fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
         val temp = this[index1]
@@ -46,11 +45,11 @@ fun main() {
         this[index2] = temp
     }
 
-    val listOfIntNumbersUsedAsSwapExample = mutableListOf(1,2,3,4,5,6)
-    println(listOfIntNumbersUsedAsSwapExample)                          //1,2,3,4,5,6
-    listOfIntNumbersUsedAsSwapExample.swap(3,5)
-    println(listOfIntNumbersUsedAsSwapExample)                          //1,2,3,6,5,4
+    val oddNumbers = mutableListOf(1,3,5,7,9)
+    println(oddNumbers)                          //1,2,3,4,5,6
 
+    oddNumbers.swap(3,5)
+    println(oddNumbers)                          //1,2,3,6,5,4
 
     // NOTE: extensions are resolved statically
     //       extension do not actually modify the classes they extend. By defining an extension,
@@ -58,7 +57,6 @@ fun main() {
     //       notation on variables of this type.
     //       extension functions are dispatched statically, which means they are not virtual by
     //       receiver type.
-
     //       An extension function being called is determined by the type of the expression on
     //       which the function is invoked, not by the type of the result from evaluating that
     //       expression at runtime. For example:
@@ -67,6 +65,7 @@ fun main() {
     class Rectangle: Shape()
 
     fun Shape.getName() = "Shape"
+
     fun Rectangle.getName() = "Rectangle"
 
     fun printClassName(shape: Shape) {
@@ -83,7 +82,7 @@ fun main() {
     // These extensions can be called on an object variable even if its value is null,
     // and they can check for this == null inside the body.
 
-    //ex:
+    //e.g.:
     fun Any?.toString(): String {
         if (this == null) return "Null"
         return toString()
@@ -97,6 +96,5 @@ fun main() {
     // Extensions utilize the same visibility modifiers as regular functions declared in the same scope would. For example:
     // An extension declared at the top level of a file has access to the other private top-level declarations in the same file.
     // If an extension is declared outside its receiver type, it cannot access the receiver's private or protected members.
-
 }
 

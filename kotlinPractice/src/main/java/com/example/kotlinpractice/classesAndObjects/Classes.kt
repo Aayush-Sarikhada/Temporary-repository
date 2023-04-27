@@ -8,14 +8,14 @@ This file contains notes and examples of classes in kotlin.
 */
 
 fun main() {
-
         //classes & objects
         class Animal(val name: String) {
-            val sound = "no-sound-1".also { println(it) }
+            val sound = "Woof!".also { println(it) }
+
             init {
                 println("first init ran")
             }
-            val sadSound = "no-sound-2".also { println(it) }
+
             init {
                 println("second init ran")
             }
@@ -34,20 +34,21 @@ fun main() {
             init{                               //just like the body of primary constructor
                 println("primary constructor ran")
             }
+
             constructor(name: String, age: Int): this(name) {
                 this.age = age
                 println("secondary constructor ran")
             }
         }
 
-        //init blocks and primary constructor runs before secondary constructors
-        //here this object is only created for checking which constructor or block runs first
+        // init blocks and primary constructor runs before secondary constructors
+        // here this object is only created for checking which constructor or block runs first
 
         var person = Person("aayush",25)
 
         // If a non-abstract class does not declare any constructors (primary or secondary), it will have a generated primary constructor with no arguments.The visibility of the constructor will be public.
         // If you don't want your class to have a public constructor, declare an empty primary constructor with non-default visibility:
-        //no need to add "open" to inherit this class since it's an abstract class
+        // no need to add "open" to inherit this class since it's an abstract class
 
         abstract class Polygon {
             abstract fun draw()
@@ -72,7 +73,6 @@ fun main() {
         //If you need to write a function that can be called without having a class instance but that needs access to the internals of a class (such as a factory method), you can write it as a member of an object declaration inside that class.
         //
         //Even more specifically, if you declare a companion object inside your class, you can access its members using only the class name as a qualifier.
-
     }
 
 

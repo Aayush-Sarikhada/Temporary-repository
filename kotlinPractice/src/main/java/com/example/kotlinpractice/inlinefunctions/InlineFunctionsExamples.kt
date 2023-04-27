@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.inline_functions
+package com.example.kotlinpractice.inlinefunctions
 
 /*
 Created By: Aayush Sarikhada

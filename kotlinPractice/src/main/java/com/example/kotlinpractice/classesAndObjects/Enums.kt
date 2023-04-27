@@ -12,7 +12,6 @@ interface WeekDays {
 }
 
 enum class Days(val nameInLowerCase: String): WeekDays {
-
     MONDAY("monday") {
         override fun shortName(): String {
             return "mon"
@@ -42,17 +41,19 @@ enum class Days(val nameInLowerCase: String): WeekDays {
         override fun shortName(): String {
             return "sat"
         }
-    },SUNDAY("sunday") {
+    },
+    SUNDAY("sunday") {
         override fun shortName(): String {
             return "sun"
         }
     };
+
     init {
         println("init is called")
     }
 }
 
-fun main(){
+fun main() {
     val firstDayOfTheWeek = Days.MONDAY
     println(firstDayOfTheWeek.nameInLowerCase)      // monday
     println(firstDayOfTheWeek.shortName())          // mon

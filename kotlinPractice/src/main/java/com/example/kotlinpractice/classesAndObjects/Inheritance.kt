@@ -5,7 +5,7 @@ Created By: Aayush Sarikhada
 Updated on: 27 apr 2023
 
 This file contains examples of Inheritance in kotlin.
- */
+*/
 
 // by default interface's members are open
 interface Shape {
@@ -15,6 +15,7 @@ interface Shape {
         println("drawing with shape interface")
     }
 }
+
 class Rectangle(override val vertices: Int = 4): Shape {
     override fun draw() {
         println("drawing rectangle")
@@ -31,7 +32,7 @@ class Polygon(override var vertices: Int): Shape {
 // In Kotlin, implementation inheritance is regulated by the following rule: if a class inherits multiple implementations of the same member from its immediate superclasses, it must override this member and provide its own implementation (perhaps, using one of the inherited ones).
 // ex:
 
-open class GeometricShape() {
+open class GeometricShape {
     open fun draw() {
         println("drawing a geometric shape")
     }
@@ -53,7 +54,7 @@ fun main() {
     Circle().draw()                     //prints: "drawing with ShapeWithDraw"
                                         // "drawing with shapeInterface
 
-    println(Rectangle().vertices)               // 4
+    println(Rectangle().vertices)                // 4
     println(Polygon(5).vertices)         // 5
 
 }

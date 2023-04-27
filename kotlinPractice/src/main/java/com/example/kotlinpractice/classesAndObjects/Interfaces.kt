@@ -41,11 +41,13 @@ class ElectricBike(override var batteryCapacityInMW: Int): ElectricVehicle {
 // When you declare many types in your supertype list, you may inherit more than one implementation of the same method:
 interface LeftEngine {
     fun startEngine() { println("Left engine starting") }
+
     fun checkEngineCondition()
 }
 
 interface RightEngine {
     fun startEngine() { println("Right engine starting") }
+
     fun checkEngineCondition() { println("Right engine condition is ok") }
 }
 
@@ -58,6 +60,7 @@ class EngineSystem : LeftEngine, RightEngine {
         super<LeftEngine>.startEngine()
         super<RightEngine>.startEngine()
     }
+
     override fun checkEngineCondition() {
         super.checkEngineCondition()
     }

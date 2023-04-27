@@ -9,15 +9,19 @@ This file contains one example of difference between Nested class and Inner clas
 
 class OuterClass {
     var outerClassString: String = "Outer class"
+
     inner class NestedInnerClass {
         var nestedInnerClassString: String = "nested inner class"
-        fun sayHelloToOuterClass() {
+
+        fun printOuterClassString() {
             println("hello $outerClassString")
         }
     }
+
     class NestedClass {
         var nestedClassString: String = "nested class"
-        fun sayHello() {
+
+        fun printOuterClassString() {
             println("hello ${OuterClass().outerClassString}")
         }
     }
@@ -28,5 +32,5 @@ fun main(){
     var nestedClassStringInOuterClass = OuterClass.NestedClass().nestedClassString
 
     // we have to create an object of outer class to actually access the inner nested class
-    OuterClass().NestedInnerClass().sayHelloToOuterClass()      // prints "hello outer class
+    OuterClass().NestedInnerClass().printOuterClassString()      // prints "hello outer class
 }

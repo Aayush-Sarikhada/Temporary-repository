@@ -32,10 +32,10 @@ value class Name(private val internalName: String) {
         require(internalName.isNotEmpty()){}                    //require(Boolean) throws IllegalArgumentException when its argument is false. Use it to test function arguments.
     }
 
-    val length:Int
+    val length: Int
         get() = internalName.length
 
-    fun greet(){
+    fun greet() {
         println("Hello, $internalName")
     }
 }
@@ -67,10 +67,10 @@ interface InterfaceThatWillBeImplementedByAClass
 @JvmInline
 value class Foo(val internalInt: Int): InterfaceThatWillBeImplementedByAClass
 
-fun asInline(asInlineClassAsItIs:Foo){}
-fun <T> asGeneric(inlineClassObjAsGeneric:T){}
-fun asInterface(inlineClassObjAsInterface:InterfaceThatWillBeImplementedByAClass){}
-fun asNullable(inlineClassObjNullable:Foo?){}
+fun asInline(asInlineClassAsItIs: Foo) { }
+fun <T> asGeneric(inlineClassObjAsGeneric: T) { }
+fun asInterface(inlineClassObjAsInterface: InterfaceThatWillBeImplementedByAClass) { }
+fun asNullable(inlineClassObjNullable: Foo?) { }
 
 //Mangling
 //Since inline classes are compiled to their underlying type, it may lead to various obscure errors, for example unexpected platform signature clashes:
