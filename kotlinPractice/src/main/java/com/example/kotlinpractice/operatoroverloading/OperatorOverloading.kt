@@ -2,17 +2,11 @@ package com.example.kotlinpractice.operatoroverloading
 
 data class Point(val x: Int,val y: Int){
     operator fun unaryMinus() = Point(-x,-y)
+
     operator fun unaryPlus() = Point(+x,+y)
-}
 
-class Car(var objName: String) {
-    // Overloading the function
-    operator fun plus(data: Int) {
-        objName = "Name is $objName and data is $data"
-    }
-
-    override fun toString(): String {
-        return objName
+    operator fun plus(otherPoint: Point): Point {
+        return Point(x + otherPoint.x, y + otherPoint.y)
     }
 }
 
@@ -26,6 +20,6 @@ fun main() {
     println(point)
 
 //    val obj = Object("obj")
-//    println(obj + 10)                   //prints: "Name is obj and data is 10"
+//    println(obj + 10)                   // prints: "Name is obj and data is 10"
 }
 

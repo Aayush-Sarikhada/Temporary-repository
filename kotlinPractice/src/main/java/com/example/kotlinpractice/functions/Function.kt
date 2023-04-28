@@ -14,7 +14,6 @@ open class ArithmeticOperationClass {
     open fun moduloThese(x: Int = 0, y: Int = 0) = x % y
 
 }
-class OverridingArithmeticOperationClass:ArithmeticOperationClass()
 
 //note:When calling Java functions on the JVM, you can't use the named argument syntax because Java bytecode does not always preserve the names of function parameters.
 
@@ -37,8 +36,7 @@ fun sumTheseNumbers(vararg numbers: Int) = numbers.sum()
 //
 //The parameter must not accept variable number of arguments and must have no default value.
 
-
-infix fun String.getAppendedBy(appendingString: String):String {
+infix fun String.getAppendedBy(appendingString: String): String {
     return this + appendingString
 }
 //Infix function calls have lower precedence than arithmetic operators, type casts, and the rangeTo operator. The following expressions are equivalent:
@@ -79,20 +77,14 @@ tailrec fun findFixPoint(x: Double = 1.0): Double =
 //}
 //To be eligible for the tailrec modifier, a function must call itself as the last operation it performs. You cannot use tail recursion when there is more code after the recursive call, within try/catch/finally blocks, or on open functions. Currently, tail recursion is supported by Kotlin for the JVM and Kotlin/Native.
 
-fun main(){
-    val functionCreatedUsingLambda:()->Int = {
-        println("hello")
-        10
-    }
+fun main() {
+    println(sumTheseNumbers(1,2,3,4))   //10
 
-    println(functionCreatedUsingLambda())       //10
-
-    println(sumTheseNumbers(1,2,3,4))
     //or use spread operator
-    println(sumTheseNumbers(*intArrayOf(1,3,6,6,9)))
+    println(sumTheseNumbers(*intArrayOf(1,3,6,6,9)))    //25
 
     //extension function demonstration (getAppendedBy)
-    var greetingsForCrowd = "Hello ladies!"
-    greetingsForCrowd = greetingsForCrowd getAppendedBy "and gentlemen"
-    println(greetingsForCrowd)
+    var greetingsForCrowd = "Hello ladies"
+    greetingsForCrowd = greetingsForCrowd getAppendedBy " and gentlemen!"
+    println(greetingsForCrowd)  // Hello ladies and gentlemen!
 }

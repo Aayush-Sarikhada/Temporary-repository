@@ -33,10 +33,10 @@ value class Password(private val pass: String) {
 }
 
 fun main() {
-    val arrayOne = Array(10){ 0 }
-    val arrayTwo = Array(10){ 0 }
-    println(arrayOne === arrayTwo)
-    println(arrayOne.contentEquals(arrayTwo))
+    val teamAScore = Array(10){ 0 }
+    val teamBScore = Array(10){ 0 }
+    println(teamAScore === teamBScore)
+    println(teamAScore.contentEquals(teamBScore))
 
     val arrayListOne = arrayListOf(0)
     val arrayListTwo = arrayListOf(0)

@@ -116,17 +116,17 @@ fun main() {
     val listOfNumbersForMutableIteratorDemo = mutableListOf(100, 200, 300, 400, 500)
     val mutableIterator = listOfNumbersForMutableIteratorDemo.listIterator()
 
-    println("before: $listOfNumbersForMutableIteratorDemo")         //prints: "before: [100, 200, 300, 400, 500]"
+    println("before: $listOfNumbersForMutableIteratorDemo")         // prints: "before: [100, 200, 300, 400, 500]"
     mutableIterator.next()
     mutableIterator.remove()
-    println("after removal $listOfNumbersForMutableIteratorDemo")   //prints: "after: [200, 300, 400, 500]"
+    println("after removal $listOfNumbersForMutableIteratorDemo")   // prints: "after: [200, 300, 400, 500]"
 
     mutableIterator.add(600)
-    println("after adding $listOfNumbersForMutableIteratorDemo")    //prints: "after adding [600, 200, 300, 400, 500]"
+    println("after adding $listOfNumbersForMutableIteratorDemo")    // prints: "after adding [600, 200, 300, 400, 500]"
 
     mutableIterator.next()
     mutableIterator.set(900)
-    println("after updating $listOfNumbersForMutableIteratorDemo")  //prints: "after updating [600, 900, 300, 400, 500]"
+    println("after updating $listOfNumbersForMutableIteratorDemo")  // prints: "after updating [600, 900, 300, 400, 500]"
 
     //Ranges and Progressions
     val rangeFromOneToTwelve = 1..12
@@ -146,15 +146,6 @@ fun main() {
 
     for (i in 10 downTo 1 step 2) print("$i ")       //prints: 10 8 6 4 2
     println()
-
-    // Sequence
-    // Constructing Sequences
-
-    // from elements
-    val numberSequence = sequenceOf("Four", "Three", "Two", "One")
-
-    // from iterable
-    val numberSequenceFromNumbersList = numbers.asSequence()
 
     //from a function
     //creates infinite sequence but lazily

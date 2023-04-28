@@ -16,25 +16,25 @@ value class RollNo(val rollNo: Int)
 @JvmInline
 value class PhoneNumber(val number: Int)
 
-typealias rollNoTypeAlis = Int
+typealias rollNoTypeAlias = Int
 typealias phoneNumberTypeAlias = Int
 
-fun checkForAssignmentCompatiblityForTypeAlis(rollNo: rollNoTypeAlis){
+fun checkAssignmentCompatibilityForTypeAlis(rollNo: rollNoTypeAlias){
     println("checking.. $rollNo")
 }
 
-fun checkForAssignmentCompatiblityForInlineClasses(rollNo: RollNo){
+fun checkAssignmentCompatibilityForInlineClasses(rollNo: RollNo){
     println("checking.. $rollNo")
 }
 
 //inline classes with delegation
 //START
-interface SmartPhone{
+interface SmartPhone {
     fun modelName()
     fun call(name: String) = "Calling $name..."
 }
 
-class SamsungM51: SmartPhone{
+class SamsungM51: SmartPhone {
     override fun modelName() {
         println("SamsungM51")
     }
@@ -42,10 +42,9 @@ class SamsungM51: SmartPhone{
 
 @JvmInline
 value class SmartPhoneWrapper(private val phone: SmartPhone): SmartPhone by phone
-
 //END
 
-fun main(){
+fun main() {
     val password = Password("abc123")
     println(password.hashCode())        //prints: -1424436592
     println(password)                   //prints: Password(password=abc123)
@@ -53,11 +52,11 @@ fun main(){
     //type alias are assignment-compatible
     val rollNum = RollNo(10)
 
-    checkForAssignmentCompatiblityForTypeAlis(10)       //no type safety    prints: checking.. 10
+    checkAssignmentCompatibilityForTypeAlis(10)       //no type safety    prints: checking.. 10
 
-//  checkForAssignmentCompatiblityForInlineClasses(10)          //direct won't work
+//  checkAssignmentCompatibilityForInlineClasses(10)          //direct won't work
 
-    checkForAssignmentCompatiblityForInlineClasses(rollNo = rollNum)        //this will work   prints: checking.. RollNo(rollNo=10)
+    checkAssignmentCompatibilityForInlineClasses(rollNo = rollNum)        //this will work   prints: checking.. RollNo(rollNo=10)
 
     val samsungM51Phone = SamsungM51()
     val samsungWrapper = SmartPhoneWrapper(samsungM51Phone)

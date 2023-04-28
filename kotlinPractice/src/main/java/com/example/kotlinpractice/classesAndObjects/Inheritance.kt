@@ -51,10 +51,10 @@ fun main() {
 // You can also override a val property with a var property, but not vice versa. This is allowed because a val property essentially declares a get method, and overriding it as a var additionally declares a set method in the derived class.
 // Note that you can use the override keyword as part of the property declaration in a primary constructor:
 
-    Circle().draw()                     //prints: "drawing with ShapeWithDraw"
-                                        // "drawing with shapeInterface
+    Circle().draw()                               // prints: "drawing with ShapeWithDraw"
+                                                  // "drawing with shapeInterface
 
-    println(Rectangle().vertices)                // 4
-    println(Polygon(5).vertices)         // 5
+    println(Rectangle().vertices)                 // 4
+    println(Polygon(5).vertices)          // 5
 
 }

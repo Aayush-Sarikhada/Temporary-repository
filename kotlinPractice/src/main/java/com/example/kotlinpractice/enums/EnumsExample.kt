@@ -39,7 +39,6 @@ fun main() {
 
     print("canonicalName: ")
     println(enumObj.declaringJavaClass.canonicalName)                    //canonicalName: com.example.kotlinpractice.enums.Months
-//  println(enumObj.declaringJavaClass.packageName)                      //won't work for below java 9
 
     print("simpleName: ")
     println(enumObj.declaringJavaClass.simpleName)                       //simpleName: Months
@@ -47,8 +46,8 @@ fun main() {
     print("typeName: ")
     println(enumObj.declaringJavaClass.typeName)                         //typeName: com.example.kotlinpractice.enums.Months
 
-    val arrayOfMonthsEnumsConstants = Months.values()
-    arrayOfMonthsEnumsConstants.forEach {
+    val monthsNames = Months.values()
+    monthsNames.forEach {
         print("${it.name} ")                                             //JAN FAB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC
     }
     println()

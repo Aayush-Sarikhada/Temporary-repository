@@ -38,9 +38,8 @@ abstract class AnimalType  implements Animal, Carnivorous, Herbivorous{
         return "Herbivorous";
     }
 }
-class AnimalTypeImpl extends AnimalType{
 
-}
+class AnimalTypeImpl extends AnimalType{ }
 
 class DiamondProblem{
     public static void main(String[] args) {

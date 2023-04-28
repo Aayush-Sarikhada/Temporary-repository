@@ -11,49 +11,38 @@ This file contains examples for delegation in kotlin.
  */
 
 //Ex:3
-class CustomGetterAndSettersForString {
+class SubmarineModelNumberDelegate {
     operator fun getValue(thisRef: Any?, prop: KProperty<*>): String {
-        return "$thisRef, thank you for delegating '${prop.name}' to me!"
+        return "ABC10001"
     }
     operator fun setValue(thisRef: Any?, prop: KProperty<*>,value: String) {
-        println("Value $value is assigned to property ${prop.name}")
+        println("Value $value will be assigned to property ${prop.name}")
     }
 }
 
-class ClassForDemoOfGetterSetterForString {
-    var strWithGetterAndSetterDelegated:String by CustomGetterAndSettersForString()                          //this tells us to either initialize this  property or provide getter or                                                                                getter+setters but we can use delegation here as well
-}
-
-class DemoForDelegation{
-    val strWithCustomGetter: String by object {
-        operator fun getValue(thisRef: Any?,prop: KProperty<*>):String {
-            return "this is a delegation value"
-        }
-    }
-
-    val laziedValue:Int by lazy {
-        println("lazy is called!")
-        10
-    }
+class Submarine {
+    var submarineModelNumber: String by SubmarineModelNumberDelegate()                          //  this tells us to either initialize this  property or provide getter or                                                                                                   getter+setters but we can use delegation here as well
 }
 
 fun main(){
 
-    ClassForDemoOfGetterSetterForString().strWithGetterAndSetterDelegated = "hello"
-
-    println(DemoForDelegation().laziedValue)
-
     //  If the initialization of a value throws an exception, it will attempt to reinitialize the value at next access.
-    val lazilyCreatedString: String by lazy {
+    val morningGreeting: String by lazy {
         // under the hood it initializes the property using synchronized (default) way( there are three mods in which lazy can initialize a property ( sychronized, unsafe and safe)
-        "hello brother"
+        "hello good morning"
     }
-    var strDelegatedToVetoable: String by Delegates.vetoable("hello") { _, old, new->              //will change the value only if the returned true from lambda else it will ignore it.
-        new.length > old.length
+    var planetName: String by Delegates.vetoable("earth") { _, old, new->              //will change the value only if the returned true from lambda else it will ignore it.
+        new.length < old.length
     }
-    var strDelegatedToObservable: String by Delegates.observable("hello") { _, old, new->              //will change the value only if the returned true from lambda else it will ignore it.
-        new.length > old.length
+    var starName: String by Delegates.observable("sun") { _, old, new->
+        println("change observed: $old -> $new")
     }
+
+    planetName = "jupiter"
+    starName = "dhruv"
+
+    println(planetName)
+    println(starName)
 }
 
 //NOTES from KOTLIN DOCS:

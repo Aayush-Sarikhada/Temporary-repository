@@ -2,10 +2,10 @@ package com.example.kotlinpractice.problemspractices
 
 /*
 Created By: Aayush Sarikhada
-Updated on: 19 apr 2023
+Updated on: 28 apr 2023
 
 This file contains example to check difference between interable vs sequence.
- */
+*/
 
 fun main() {
     val arrayOfInteger: Array<Int> = Array(10){ 0 }                //explicitly zero is initialized

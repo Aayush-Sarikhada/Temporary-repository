@@ -51,18 +51,19 @@ interface RightEngine {
     fun checkEngineCondition() { println("Right engine condition is ok") }
 }
 
-class ImplLeftEngine : LeftEngine {
+open class LeftEngineImpl : LeftEngine {
     override fun checkEngineCondition() { println("Left engine condition is ok") }
 }
 
-class EngineSystem : LeftEngine, RightEngine {
+class EngineSystem : LeftEngine, RightEngine, LeftEngineImpl() {
     override fun startEngine() {
         super<LeftEngine>.startEngine()
         super<RightEngine>.startEngine()
     }
 
     override fun checkEngineCondition() {
-        super.checkEngineCondition()
+        super<RightEngine>.checkEngineCondition()
+        super<LeftEngineImpl>.checkEngineCondition()
     }
 }
 

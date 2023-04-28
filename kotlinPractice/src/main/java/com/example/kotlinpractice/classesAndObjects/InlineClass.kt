@@ -44,12 +44,12 @@ value class Name(private val internalName: String) {
 // NOTE: It is forbidden for inline classes to participate in a class hierarchy. This means that inline classes cannot extend other classes and are always final.
 
 interface Printable {
-    fun prettyPrint():String
+    fun introduce(): String
 }
 
 @JvmInline
-value class NameWithPrettyPrint(private val internalName: String): Printable {
-    override fun prettyPrint(): String  = "Let's go $internalName!"
+value class NameWithIntro(private val internalName: String): Printable {
+    override fun introduce(): String  = "Hello my name is $internalName!"
 }
 
 // The Kotlin compiler will prefer using underlying types instead of wrappers to produce the most performant and optimized code. However, sometimes it is necessary to keep wrappers around. As a rule of thumb, inline classes are boxed whenever they are used as another type.
@@ -63,17 +63,17 @@ value class NameWithPrettyPrint(private val internalName: String): Printable {
 
 // MANGLING in kotlin for inline classes
 
-interface InterfaceThatWillBeImplementedByAClass
+interface Hobby
 @JvmInline
-value class Foo(val internalInt: Int): InterfaceThatWillBeImplementedByAClass
+value class Sports(val name: String): Hobby
 
-fun asInline(asInlineClassAsItIs: Foo) { }
-fun <T> asGeneric(inlineClassObjAsGeneric: T) { }
-fun asInterface(inlineClassObjAsInterface: InterfaceThatWillBeImplementedByAClass) { }
-fun asNullable(inlineClassObjNullable: Foo?) { }
+fun asInline(hobby: Hobby) { }
+fun <T> asGeneric(hobby: T) { }
+fun asInterface(hobby: Hobby) { }
+fun asNullable(hobby: Sports?) { }
 
-//Mangling
-//Since inline classes are compiled to their underlying type, it may lead to various obscure errors, for example unexpected platform signature clashes:
+// Mangling
+// Since inline classes are compiled to their underlying type, it may lead to various obscure errors, for example unexpected platform signature clashes:
 //
 @JvmInline
 value class UInt(val x: Int)
@@ -99,14 +99,14 @@ fun main(){
     name.greet()
     println(name.length)
 
-    val playName = NameWithPrettyPrint("Play")
-    println(playName.prettyPrint())                     //prints: Let's go Play
+    val ajay = NameWithIntro("Ajay")
+    println(ajay.introduce())                     //prints: Let's go Play
                                                         // Still called as a static method
 
-    val instanceOfFooToTestInlineClasses = Foo(42)
+    val sport = Sports("Tennis")
 
-    asInline(instanceOfFooToTestInlineClasses)          // unboxed: used as Foo itself
-    asGeneric(instanceOfFooToTestInlineClasses)         // boxed: used as generic type T
-    asInterface(instanceOfFooToTestInlineClasses)       // boxed: used as type I
-    asNullable(instanceOfFooToTestInlineClasses)        // boxed: used as Foo?, which is different from Foo
+    asInline(sport)          // unboxed: used as Foo itself
+    asGeneric(sport)         // boxed: used as generic type T
+    asInterface(sport)       // boxed: used as type I
+    asNullable(sport)        // boxed: used as Foo?, which is different from Foo
 }
